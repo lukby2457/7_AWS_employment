@@ -1,0 +1,38 @@
+자바 웹 어플리케이션에서 DB 접속과 관련된 라이브러리가
+JDBC, DBCP 입니다.
+
+JDBC는 Java DataBase Connectivity 의 약자로 자바에서 데이터베이스에 연결하기 위한 인터페이스
+
+그럼 JDBC만 있으면 DB접속이 되는데 DBCP는 왜 쓰지? 라는 궁금증이 생기실 겁니다.
+답은 '효율'
+
+
+JDBC만을 사용할 경우라면 DB접속 시 아래와 같은 순서가 반복되게 됩니다.
+
+1. DB 접속을 위한 JDBC '드라이버 로드'
+2. getConnection Method로 부터 DB '커넥션' 객체를 얻음
+3. 쿼리 수행을 위한 Statement 객체 생성
+4. excuteQuery를 실행해서 결과를 받아옴.
+5. Connection 해제
+
+
+여기서 비효율적인 부분은 1번, 2번, 5번이다
+DB 연결 시 마다 Driver를 로드하고 커넥션 객체를 얻는 작업을 반복
+이 부분을 효율적으로 처리하도록 바꾸는 것이 DBCP의 역할
+
+DBCP : DB Connection Pooling
+
+DBCP를 사용하게 되면,
+WAS 실행 시 미리 일정량의 DB Connection 객체를 생성하고 Pool 이라는 공간에 저장
+DB 연결 요청이 있으면, 이 Pool 이라는 공간에서 Connection 객체를 가져다 쓰고 반환하는 과정
+
+
+DBCP를 사용하므로써 설정할 수 있는 옵션은 아래와 같습니다.
+
+maxActive (=maxTotal / Java) : 동시에 사용할 수 있는 최대 커넥션 개수 (음수면 제한 없음)
+maxIdle : Connection Pool에 반납할 때 최대로 유지될 수 있는 커넥션 개수
+minIdle : 최소한으로 유지할 커넥션 개수
+initialSize : 최소로 getConnection() Method를 통해 커넥션 풀에 채워 넣을 커넥션 개수
+maxWait : 사용가능한 커넥션이 없을때 커넥션을 준비하기 위해 최대로 기다리는 초 (음수면 무한히 대기)
+
+
