@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex13.html</title>
+</head>
+<body>
+    <h1>테이블 태그</h1>
+    <hr>
+
+    <!--
+        table : 표를 작성하는 태그
+        tr : table row. 테이블의 행을 생성
+        td : table data. 테이블의 열(칸)을 생성
+        th : table headline. 테이블의 열을 생성, 폰트가 두껍고 가운데 정렬
+    -->
+
+    <table border="1" cellspacing="0" cellpadding="10">
+        <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>신장</th>
+        </tr>
+        <tr>
+            <td>홍길동</td>
+            <td>22세</td>
+            <td>176.6cm</td>
+        </tr>
+        <tr>
+            <td>김수진</td>
+            <td>27세</td>
+            <td>160.3cm</td>
+        </tr>
+        <tr>
+            <td rowspan="2">박철수</td>
+            <td>16세</td>
+            <td>167.8cm</td>
+        </tr>
+        <tr>
+            <td colspan="2">부산 광역시 해운대구 센텀</td>
+        </tr>
+    </table>
+
+</body>
+</html>
