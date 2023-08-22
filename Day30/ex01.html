@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex01.html</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px 10px;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>테이블 태그</h1>
+    <hr>
+
+    <table>
+        <caption><h4>사원 테이블</h4></caption>
+        <thead>     <!-- 테이블 헤드라인 -->
+            <tr>
+                <th>사원 번호</th>
+                <th>이름</th>
+                <th>연봉</th>
+                <th>부서 코드</th>
+            </tr>
+        </thead>
+        <tbody>     <!-- 테이블을 구성하는 실제 데이터 -->
+            <tr>
+                <td>20230101</td>
+                <td>홍길동</td>
+                <td>3500</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>20230102</td>
+                <td>박민지</td>
+                <td>3200</td>
+                <td>200</td>
+            </tr>
+        </tbody>
+        <tfoot>     <!-- 주로 마지막 열에 지정. 통계에 자주 사용-->
+            <tr>
+                <th>통계</th>
+                <td></td>
+                <td>6700</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+</body>
+</html>

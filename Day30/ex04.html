@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04.html</title>
+    <style>
+        fieldset{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <h1>input의 타입</h1>
+    <hr>
+
+    <fieldset>
+        <legend>type</legend>
+
+        <form>
+            <!-- text : 모든 데이터를 입력 가능 -->
+            <!-- value : 전송할 데이터. 값을 작성해두면 접속시 미리 채워져 있음 -->
+            <!-- document.getElementsByName('userid')[0].value; = value -->
+            <p><input type="text" name="userid" placeholder="ID" required value="itbank"></p>
+
+            <!-- password : text와 동일하나 텍스트를 가려준다 -->
+            <p><input type="password" name="userpw" placeholder="PW" required></p>
+
+            <!-- email : 텍스트에 @가 있는지 검사 -->
+            <p><input type="email" name="email" placeholder="이메일"></p>
+
+            <!-- date : 날짜 형태를 입력 받는다. placeholder가 적용되지 않음 -->
+            <p><input type="date" name="birth"></p>
+
+            <!-- color : 색상 값을 선택한다. 전송시 16진수로 전달됨 -->
+            <p><input type="color" name="color"></p>
+
+            <button>전송</button>
+        </form>
+    </fieldset>
+
+</body>
+</html>
