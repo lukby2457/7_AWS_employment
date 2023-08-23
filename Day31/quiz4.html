@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문서 작성하기</title>
+    <style>
+        th, td{
+            padding: 5px;
+        }
+        th{
+            text-align: left;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <h1>상품 주문서</h1>
+
+    <form>
+        <fieldset>
+            <legend>개인 정보</legend>
+
+            <table>
+                <tr>
+                    <th>이름</th>
+                    <td>
+                        <input type="text" name="name" placeholder="여백없이 입력">
+                    </td>
+                </tr>
+                <tr>
+                    <th>연락처</th>
+                    <td>
+                        <input type="text" name="phone" placeholder="연락 가능한 번호">
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>배송지 정보</legend>
+
+            <table>
+                <tr>
+                    <th>주소</th>
+                    <td>
+                        <input type="text" name="address">
+                    </td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td>
+                        <input type="text" name="del_phone">
+                    </td>
+                </tr>
+                <tr>
+                    <th>메모</th>
+                    <td>
+                        <textarea name="memo" cols="30" rows="5"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>주문 정보</legend>
+
+            <p>
+                <input type="checkbox" name="order">과테말라 안티구아 (100g)
+                <input type="number" name="g_num" value="0">개
+            </p>
+            <p>
+                <input type="checkbox" name="order">인도네시아 만델리 (100g)
+                <input type="number" name="i_num" value="0">개
+            </p>
+            <p>
+                <input type="checkbox" name="order">탐라는도다(블렌딩) (100g)
+                <input type="number" name="t_num" value="0">개
+            </p>
+        </fieldset>
+        <p>
+            <button>주문하기</button>
+            <button type="reset">다시 작성</button>
+        </p>
+    </form>
+</body>
+</html>

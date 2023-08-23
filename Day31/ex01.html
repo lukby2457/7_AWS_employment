@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex01.html</title>
+</head>
+<body>
+    <h1>label</h1>
+    <hr>
+
+    <h4>사용자에게 입력을 알려줄 Label</h4>
+    <h4>placeholder를 사용하기도 한다</h4>
+
+    <form>
+        <p>
+            <!-- for는 id에 연결된다!!! -->
+            <label for="userName">이름 : </label> 
+            <input type="text" name="name" id="userName">
+            <!-- name : 작성된 내용. id : for에서 사용 -->
+        </p>
+
+        <p>
+            <label for="userBirth">생년월일 : </label>
+            <input type="date" name="birth" id="userBirth">
+        </p>
+
+        <button>전송</button>
+    </form>
+
+</body>
+</html>

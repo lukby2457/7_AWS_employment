@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 접수</title>
+    <style>
+        fieldset{
+            display: inline;
+        }
+        th, td{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>예약 정보</h1>
+    <hr>
+
+    <fieldset>
+        <legend>예약</legend>
+
+        <form>
+            <table>
+                <tr>
+                    <td><label for="name">이 름</label></td>
+                    <td><input type="text" name="name" id="name" placeholder="이름 입력 필수*" required></td>
+                </tr>
+                <tr>
+                    <td><label for="phone">휴대폰</label></td>
+                    <td><input type="text" name="phone" id="phone" placeholder="번호를 - 없이 입력*" required></td>
+                </tr>
+                <tr>
+                    <td><label for="email">이메일</label></td>
+                    <td><input type="email" name="email" id="email" placeholder="이메일 입력*" required></td>
+                </tr>
+                <tr>
+                    <td><label for="start_date">날짜</label></td>
+                    <td><input type="date" name="date1" id="start_date"></td>
+                </tr>
+                <tr>
+                    <td><label for="start_time">시간</label></td>
+                    <td><input type="time" name="time" id="start_time"></td>
+                </tr>
+                <tr>
+                    <td><label for="end_date">날짜2</label></td>
+                    <td><input type="datetime-local" name="date2" id="end_date"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button>예약하기</button>
+                        <button type="reset">다시입력</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </fieldset>
+
+</body>
+</html>

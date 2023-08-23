@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04.html</title>
+
+    <style>
+        * {     /* 1. 전체 선택자 */
+            color: aqua;
+        }
+
+        body{   /* 2. 태그 선택자 */
+            background-color: gray;
+        }
+
+        p {
+            color: yellow;
+        }
+
+        #unique {   /* id 선택자 : 지정 id에만 스타일을 적용 */
+                    /* ※ id는 고유하게 사용을 권장!!! */
+            color: red;
+        }
+
+        .group {    /* 클래스 선택자 : 지정 그룹들에만 스타일을 적용*/
+            color : pink;
+            font-size: 25px;
+        }
+
+        /*
+            1. 선택자는 세부적일수록 우선순위가 높다
+            ※ id > group > tag > *
+
+            2. 우선순위가 같으면 아래 작성된 구문이 적용된다
+        */
+
+        #unique:hover {
+            transition: 1s;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS 선택자 (selector)</h1>
+    <hr>
+
+    <h4>선택자는 말그대로 어떤 태그를 선택할지 고르는 개념</h4>
+
+    <p>Hello Java!!!</p>
+    <p class="group">Welcome To Oracle DB</p>
+    <p id="unique" class="group">HTML Is Not Program Language</p>
+    <p class="group">Let Start CSS!!!</p>
+
+</body>
+</html>

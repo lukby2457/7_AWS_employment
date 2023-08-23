@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex02.html</title>
+    <style>
+        th, td{
+            padding: 5px 10px;
+        }
+        input{
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>label</h1>
+    <hr>
+
+    <h4>간격을 맞출땐 CSS가 정석이지만 table을 활용하기도 한다</h4>
+
+    <!-- name은 중복되어도 리스트로 결과값을 표현할 수 있음 -->
+    <!-- id는 고유식별자. 중복X. 중복되게 만들면 뒤에 것을 찾을수 없게 됨 -->
+    <form>
+        <table>
+            <tr>
+                <td><label for="name">이름</label></td>
+                <td><input type="text" name="name" id="name"></td>
+            </tr>
+            <tr>
+                <td><label for="birth">생년월일</label></td>
+                <td><input type="date" name="birth" id="birth"></td>
+            </tr>
+            <tr>
+                <td>
+                    <button>전송</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
