@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex05.html</title>
+    <style>
+        div {
+            width: 100px;
+            height: 50px;
+            background-color: orange;
+            margin: 10px;
+            border: 5px solid black;
+            padding: 7px;
+        }
+        #first {
+            box-sizing: content-box;
+        }
+        #second{
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>박스의 크기</h1>
+    <hr>
+
+    <h4>박스의 크기를 지정할 땐 2가지 방식이 존재</h4>
+
+    <ol>
+        <li>contents-box : contents와 padding, border의 너비/높이가 별도로 계산</li>
+        <li>border-box : contents + padding + border까지 최종 너비/높이가 된다</li>
+    </ol>
+
+    <div id="first">first</div>
+
+    <div id="second">second</div>
+
+</body>
+</html>

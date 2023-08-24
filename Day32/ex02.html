@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex02.html</title>
+    <style>
+        div {
+            background-color: coral;
+            width: 100px;
+            height: 50px;
+            margin: 10px 0; /* 상하 좌우 */
+            /* border도 크기를 가진다 */
+            /* border 안의 여백 : padding */
+            /* border 바깥의 여백 : margin */
+        }
+        span {
+            background-color: gold;
+            width: 100px;
+            height: 50px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>태그의 박스(box) 모델</h1>
+    <hr>
+
+    <h4>태그들은 모두 네모(box) 형태로 이루어져 있다</h4>
+
+    <details>
+        <summary>box 기본 타입은 크게 2가지</summary>
+
+        <ol>
+            <li>block
+                <ul>
+                    <li>페이지 한 줄 전체를 차지한다</li>
+                    <li>따라서 보통 줄바꿈이 발생한다</li>
+                    <li>태그들이 위에서 부터 아래로 쌓이는 형태를 가진다</li>
+                    <li>너비와 높이를 가질 수 있다</li>
+                </ul>
+            </li>
+            <li>in-line
+                <ul>
+                    <li>한 줄에 여러개가 배치된다</li>
+                    <li>너비와 높이를 가질 수 없다</li>
+                    <li>딱 내부 요소의 내용만큼 너비와 높이가 지정됨</li>
+                </ul>
+            </li>
+        </ol>
+    </details>
+
+    <hr>
+
+    <h4>실습</h4>
+
+    <div>
+        hello world
+    </div>
+    <div>
+        box model
+    </div>
+
+    <p>
+        <!-- span을 한 줄로 붙이면 여백이 발생하지 않는다-->
+        <span>Hello</span>
+        <span>Hyper Text Markup Language</span>
+    </p>
+
+</body>
+</html>

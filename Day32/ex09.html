@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex09.html</title>
+    <style>
+        .container {
+            margin: 20px 0;
+        }
+        .item {
+            width: 100px;
+            padding: 15px 0;
+            /* 상하 좌우 */
+            /* 상 우 하 좌 */
+            text-align: center;
+            float: left;
+            margin: 0 10px;
+        }
+        .clear {
+            clear: both;
+            /* float은 끝내지 않으면 계속 배치가 될 수 있음 */
+            /* clear는 float을 끝낸다는 의미 */
+        }
+        .item:hover {
+            color: white;
+            cursor: pointer;
+        }
+        .item:nth-child(2n+1) {
+            background-color: gold;
+            /* padding: 30px 0; */
+            /* 크기가 다르면 위로 배치가 된다 */
+        }
+        .item:nth-child(2n) {
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+    <h1>float을 활용한 가로 배치</h1>
+    <hr>
+
+    <h4>과거에 잘 못 사용된 형태로 최근엔 권장하지 않음</h4>
+
+    <div class="container">
+        <div class="item">메뉴1</div>
+        <div class="item">메뉴2</div>
+        <div class="item">메뉴3</div>
+        <div class="item">메뉴4</div>
+        <div class="clear"></div>
+    </div>
+
+    <div>
+        <img src="img/banner.png">
+    </div>
+
+</body>
+</html>

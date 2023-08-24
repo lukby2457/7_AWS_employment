@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex11.html</title>
+    <style>
+        .container {
+            border: 1px solid black;
+            width: 500px;
+            height : 500px;
+            display: flex;                      /* 현재 태그를 flex로 지정 */
+            flex-direction: row-reverse;        /* flex의 주축을 지정 (row가 기본) */
+            justify-content: space-between;     /* 주축의 item 배치 */
+            align-items: center;                /* 역축의 item 배치 */
+
+            flex-wrap: wrap;
+            /* 현재 컨테이너 크기보다 많은 요소가 배치되면 */
+            /* 다음 줄을 생성해서 배치한다 */
+        }
+        #col {
+            flex-direction: column;             /* 주축을 column으로 */
+            justify-content: space-evenly;
+            align-items: end;
+        }
+        .item {
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+        }
+        .item:nth-child(2n + 1) {
+            background-color: gold;
+        }
+        .item:nth-child(2n) {
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+    <h1>flex를 활용한 레이아웃 설정</h1>
+    <hr>
+
+    <h3>주축 : row</h3>
+
+    <div class="container">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+
+    <h3>주축 : column</h3>
+
+    <div id="col" class="container">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+
+</body>
+</html>
