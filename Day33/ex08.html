@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex08.html</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px 15px;
+        }
+        tr {
+            border-bottom: 1px solid lightgray;
+        }
+        thead > tr, tfoot > tr {
+            border-bottom: 0;
+            background-color: rgb(236, 236, 236);
+        }
+        tbody > tr:last-child {
+            border: 0;
+        }
+        tbody > tr:hover {
+            background-color: beige;
+            color: black;
+        }
+        tbody > tr:active {
+            color: red;
+        }
+        /* 홀수번째 줄을 배경은 검은색, 폰트는 화이트로 변경 */
+        tbody > tr:nth-child(2n + 1):hover {
+            background-color: black;
+            color: white;
+        }
+        table:hover {
+            transition: all 1s;
+            transform: translate(300px, 300px);
+        }
+    </style>
+</head>
+<body>
+    <h1>가상 선택자2</h1>
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th>학번</th>
+                <th>이름</th>
+                <th>성적</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>20230101</td>
+                <td>홍길동</td>
+                <td>87</td>
+            </tr>
+            <tr>
+                <td>20230102</td>
+                <td>박찬호</td>
+                <td>73</td>
+            </tr>
+            <tr>
+                <td>20230103</td>
+                <td>고은진</td>
+                <td>91</td>
+            </tr>
+            <tr>
+                <td>20230104</td>
+                <td>이지수</td>
+                <td>68</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>합계</th>
+                <th></th>
+                <td>319</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</body>
+</html>

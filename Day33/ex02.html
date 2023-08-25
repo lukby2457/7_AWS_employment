@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex02.html</title>
+    <style>
+        .color {
+            width: 500px;
+            height: 300px;
+            box-sizing: border-box;
+            background-color: lightgray;    /* 배경 색상을 지정 */
+            background-clip: content-box;     /* 배경 색상을 지정할 범위 */
+            color: brown;
+            padding: 0 20px;
+            border: 1px solid black;
+        }
+        .img {
+            width: 800px;
+            height: 700px;
+            background-color: gold;
+            background-image: url('img/back.jpg');
+            background-repeat: no-repeat;
+            /* 배경이 삽입되는 영역보다 이미지가 작으면 반복(repeat) 된다 */
+            /* 이때 반복을 제거할 때 no-repeat. repeat이 기본값 */
+
+            background-size: 100% 100%;     /* 백분율 : 가로 세로 */
+            background-size: cover;
+            /* cover : 이미지가 공간을 덮어버린다. 이미지가 넘치게 되면 짤림 */
+
+            background-size: contain;
+            /* contain : 이미지가 요소안에 꽉차게. 남는 너비/높이가 생길 수 있다 */
+            /* auto가 기본값. 원본 크기 */
+        }
+    </style>
+</head>
+<body>
+    <h1>배경 속성</h1>
+    <hr>
+    
+    <div class="color">
+        <h2>Hello CSS</h2>
+
+        <p>Welcome to Front-end</p>
+    </div>
+
+    <hr>
+
+    <div class="img">
+
+    </div>
+
+</body>
+</html>

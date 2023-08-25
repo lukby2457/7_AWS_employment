@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex07.html</title>
+    <style>
+        a:link {    /* 방문한적 없는 링크 */
+            color: green;
+        }
+        a:active {  /* 요소를 마우스로 누르고 있을때 */
+            color: hotpink;
+        }
+        a:visited { /* 방문한적 있는 링크 */
+            color: gray;
+        }
+        a {
+            text-decoration: none;
+        }
+        a:hover {   /* 요소에 마우스가 포개어지면 */
+            text-decoration: underline;
+        }
+        input:focus {   /* input이나 입력이 가능한 태그에 커서가 삽입된 경우 */
+            background-color: lightgray;
+        }
+        input[type=password] {  /* 지정 속성과 일치하는 값을 가진 태그 */
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>가상 선택자</h1>
+    <hr>
+
+    <h4>특정 이벤트일 때 적용되는 선택자</h4>
+
+    <p><a href="https://www.naver.com/">네이버</a></p>
+
+    <p><a href="https://www.youtube.com/">유튜브</a></p>
+
+    <p><input type="text"></p>
+
+    <p><input type="password"></p>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04.html</title>
+    <style>
+        .container{
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            font-size: 0;
+
+            /* 4번 박스 absolute 속성시 아래 속성을 주석 처리하며 확인 */
+            /* position: relative;     static이 기본값 */
+            /* container가 static이면 absolute는 body 태그 기준으로 절대 경로로 이동 */
+        }
+        .container > div {
+            width: 15px;
+            padding: 25px;
+            display: inline-block;
+            font-size: 16px;
+        }
+        #one {
+            background-color: red;
+            position: static;   /* 기본값 */
+            top: 10px;          /* static은 position 위치 지정 불가 */
+        }
+        #two {
+            background-color: orange;
+            position: relative; /* static과 비슷해 보이지만 position 지정이 가능 */
+            top: 10px;
+            left: 20px;
+            z-index: 2;
+            /* z-index는 화면 안/밖으로 나오는 위치를 지정. 숫자가 높을 수록 위로 */
+        }
+        #three {
+            background-color: gold;
+            position: relative;
+            z-index: 1;
+        }
+        #four {
+            background-color: green;
+            position: absolute;
+            /*
+                absolute : 이전 태그에 관계 없이 절대 위치로 position 지정
+                - 둘러싼 container가 relative인 경우 container 안에서 절대 경로로 이동
+                - 만약 container가 static이면 absolute는 body 태그 기준으로 절대 경로로 이동
+            */
+
+            top: 50%;
+            right: 50%;
+            /* 꼭짓점이 가운데로 간다 */
+        }
+        #five {
+            background-color: blue;
+            color: white;
+            position: fixed;
+            /* 웹 브라우저에 고정 */
+            /* 페이지의 내용이 많아서 스크롤을 해도 따라서 움직임 */
+
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>position 속성</h1>
+    <hr>
+
+    <h4>박스를 원하는 위치만큼 이동 혹은 배치하는 속성</h4>
+
+    <div class="container">
+        <div id="one">1</div>
+        <div id="two">2</div>
+        <div id="three">3</div>
+        <div id="four">4</div>
+        <div id="five">5</div>
+    </div>
+
+</body>
+</html>
