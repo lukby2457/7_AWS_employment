@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* +는 현재 선택자의 다음 선택자를 의미 */
+        input:checked + .container > img:nth-child(1) {
+            transform: translateY(200px);
+            transition: all 5s;     /* property, duration */
+        }
+        input:checked + .container > img:nth-child(2) {
+            transform: scaleX(0.5);
+            transition: all 5s;
+        }
+        input:checked + .container > img:nth-child(3) {
+            transform: rotate(90deg);
+            transition: all 5s;
+        }
+        input:checked + .container > img:nth-child(4) {
+            transform: skew(-30deg);
+            transition: all 5s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz1</h1>
+    <hr>
+
+    <p>img/banner.png를 화면에 띄우고 애니메이션을 적용</p>
+    <p>애니메이션 속성값은 자유롭게</p>
+
+    <input type="checkbox">start
+
+    <div class="container">
+        <img src="img/banner.png" width="150px">
+        <img src="img/banner.png" width="150px">
+        <img src="img/banner.png" width="150px">
+        <img src="img/banner.png" width="150px">
+    </div>
+
+    <!-- CSS를 ~로 바꾸면 작동함 -->
+    <div class="container">
+        <img src="img/banner.png" width="150px">
+        <img src="img/banner.png" width="150px">
+        <img src="img/banner.png" width="150px">
+        <img src="img/banner.png" width="150px">
+    </div>
+
+</body>
+</html>

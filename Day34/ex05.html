@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex05.html</title>
+    <style>
+        img {
+            width: 150px;
+            animation: test 1s linear infinite;
+            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+            /* 이름 실행시간 타이밍속도 횟수 */
+            /* 횟수에 infinite를 주면 무한대로 실행 */
+        }
+
+        @keyframes test {   /* 애니메이션 이름 */
+            0% {          /* n% : 애니메이션 실행시간의 백분율. ex) 1초의 10%는 0.1초 지정 */
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>애니메이션 효과</h1>
+    <hr>
+
+    <img src="img/banner.png">
+
+</body>
+</html>

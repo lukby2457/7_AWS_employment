@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex01.html</title>
+    <style>
+        div > div {
+            background-color: gold;
+            width: 45px;
+            padding: 15px 10px;
+            margin: 10px 0;
+        }
+        .move div:nth-child(1) {
+            transform: translate(100px, 0);     /* translate(x축, y축) */
+        }
+        .move div:nth-child(2) {
+            transform: translate(0, 100px);
+            background-color: greenyellow;
+        }
+        .move div:nth-child(3) {
+            transform: translate(100px, 100px);
+            background-color: cyan;
+        }
+        .size > div {
+            margin: 60px 30px;
+        }
+        .size div:nth-child(1) {
+            transform: scale(2, 1);             /* scale(x배율, y배율) */
+        }
+        .size div:nth-child(2) {
+            transform: scale(1, 2);
+        }
+        .size div:nth-child(3) {
+            transform: scale(2, 2);
+        }
+        .rotate div:nth-child(1) {
+            transform: rotate(45deg);           /* rotate(각도) */
+        }
+        .rotate div:nth-child(2) {
+            transform: rotate(-45deg);          /* 양수 : 시계, 음수 : 반시계 */
+        }
+        .twist div:nth-child(1) {
+            transform: skew(10deg, 0);          /*  */
+        }
+        .twist div:nth-child(2) {
+            transform: skew(0, 10deg);
+        }
+        .twist div:nth-child(3) {
+            transform: skew(10deg, 10deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS 애니메이션</h1>
+    <hr>
+
+    <h4>CSS에서 부터는 자체적으로 애니메이션 효과를 지원한다</h4>
+
+    <div>
+        <div>원본</div>
+    </div>
+    <hr>
+
+    <div class="move">
+        <div>이동1</div>
+        <div>이동2</div>
+        <div>이동3</div>
+    </div>
+
+    <br><br><br><br><hr>
+
+    <div class="size">
+        <div>확대1</div>
+        <div>확대2</div>
+        <div>확대3</div>
+    </div>
+    <hr>
+
+    <div class="rotate">
+        <div>회전1</div>
+        <div>회전2</div>
+    </div>
+    <br><hr>
+
+    <div class="twist">
+        <div>왜곡1</div>
+        <div>왜곡2</div>
+        <div>왜곡3</div>
+    </div>
+    
+</body>
+</html>

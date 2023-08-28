@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex03.html</title>
+    <style>
+        .container > div {
+            box-sizing: border-box;
+            width: 50px;
+            height: 50px;
+            margin: 10px 0;
+            background-color: gold;
+        }
+        input:checked ~ .container > div {
+            width: 100%;
+            border-radius: 30px;
+            background-color: rgb(141, 206, 195);
+        }
+        .all {
+            transition: all 5s;
+            /* all : 모든 요소가 5초 동안 변경 */
+        }
+        .sub {
+            transition: background-color 5s;
+            /* 배경만 5초 동안 변경 그 외는 즉시 변경 */
+        }
+        .noDel {
+            transition: all 5s;
+        }
+        .del {
+            transition: all 5s 1s;
+            /* 1초 이후 애니메이션 설정. 생략시 0초 */
+        }
+        .linear {
+            transition: all 5s linear;
+        }
+        .ease {
+            transition: all 5s ease;
+        }
+        .ease-in {
+            transition: all 5s ease-in;
+        }
+        .ease-out {
+            transition: all 5s ease-out;
+        }
+        .ease-in-out {
+            transition: all 5s ease-in-out;
+            /* property time timing delay */
+        }
+    </style>
+</head>
+<body>
+    <h1>Transition의 속성</h1>
+    <hr>
+
+    <input type="checkbox">start
+
+    <h4>1. property</h4>
+
+    <div class="container">
+        <div class="all">a</div>
+        <div class="sub">s</div>
+    </div>
+
+    <h4>2. delay</h4>
+
+    <div class="container">
+        <div class="noDel">n</div>
+        <div class="del">d</div>
+    </div>
+
+    <h4>3. timing</h4>
+
+    <div class="container">
+        <div class="linear">l</div>
+        <div class="ease">e</div>
+        <div class="ease-in">ei</div>
+        <div class="ease-out">eo</div>
+        <div class="ease-in-out">eio</div>
+    </div>
+
+</body>
+</html>

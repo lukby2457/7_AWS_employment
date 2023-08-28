@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container > div {
+            box-sizing: border-box;
+            width: 50px;
+            height: 50px;
+            margin: 10px 0;
+            background-color: rgb(214, 230, 245);
+        }
+        .all {
+            animation: all 5s linear infinite;
+        }
+        .half {
+            animation: half 5s linear infinite;
+        }
+        img {
+            width: 150px;
+            animation: vibrate 0.1s linear infinite;
+        }
+
+        @keyframes all {
+            50% {
+                width: 100%
+            }
+        }
+
+        @keyframes half {
+            50% {
+                width: 50%
+            }
+        }
+
+        @keyframes vibrate {
+            0%{transform: rotate(0deg);}
+            12.5%{transform: rotate(-5deg);}
+            25%{transform: rotate(0deg);}
+            37.5%{transform: rotate(5deg);}
+            50%{transform: rotate(0deg);}
+            62.5%{transform: rotate(-5deg);}
+            75%{transform: rotate(0deg);}
+            87.5%{transform: rotate(5deg);}
+            100%{transform: rotate(0deg);}
+        }
+    </style>
+</head>
+<body>
+    <!-- 막대 2개
+    하나는 끝까지 왔다갔다
+    나머지하나는 50%만 왔다갔다 -->
+
+    <div class="container">
+        <div class="all"></div>
+        <div class="half"></div>
+    </div>
+
+    <img src="img/banner.png">
+</body>
+</html>

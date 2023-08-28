@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex07.html</title>
+    <style>
+        .container {
+            width: 400px;
+            overflow: hidden;
+        }
+        .container img {
+            width: 400px;
+        }
+        .slider {
+            display: flex;
+            animation: flow 12s linear infinite;
+        }
+
+        @keyframes flow {
+            /* 0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(0);
+            }
+            40% {
+                transform: translate(-400px);;
+            }
+            60% {
+                transform: translate(-400px);
+            }
+            80% {
+                transform: translate(-800px);
+            }
+            100% {
+                transform: translate(-800px);
+            } */
+            12.5% {
+                transform: translate(0);
+            }
+            25% {
+                transform: translate(-400px);
+            }
+            37.5% {
+                transform: translate(-400px);
+            }
+            50% {
+                transform: translate(-800px);
+            }
+            62.5% {
+                transform: translate(-800px);
+            }
+            75% {
+                transform: translate(-400px);
+            }
+            87.5% {
+                transform: translate(-400px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+        /* .slider:hover {
+            transform: translateX(-400px);
+            transition: all 3s;
+        } */
+    </style>
+</head>
+<body>
+    <h1>image 슬라이드</h1>
+    <hr>
+
+    <div class="container">
+        <div class="slider">
+            <div><img src="img/first.jpg" alt=""></div>
+            <div><img src="img/second.jpg" alt=""></div>
+            <div><img src="img/third.jpg" alt=""></div>
+        </div>
+    </div>
+
+</body>
+</html>
