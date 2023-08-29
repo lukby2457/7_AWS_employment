@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04.html</title>
+</head>
+<body>
+    <h1>JS의 자료형</h1>
+    <hr>
+
+    <ul>
+        <li>number : 숫자 (정수, 실수)</li>
+        <li>string : 문자열</li>
+        <li>boolean : 논리</li>
+        <li>undefined : 변수 선언 후 초기화 하지 않은 경우</li>
+        <li>null : 값이 없거나 유효하지 않음</li>
+    </ul>
+
+    <h4>결과</h4>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        var num = 10;
+        var str = '10';
+        var bol = true
+        var und;
+        var nul = null;
+
+        var ulResult = document.getElementsByTagName('ul')[1]
+
+        // js는 문자열로 데이터를 이어서 저장 및 출력 가능
+        var result = 
+            '<li>num 타입 : ' + typeof num + '</li>' + 
+            '<li>str 타입 : ' + typeof str + '</li>' + 
+            '<li>bol 타입 : ' + typeof bol + '</li>' + 
+            '<li>und 타입 : ' + typeof und + '</li>' + 
+            '<li>nul 타입 : ' + typeof nul + '</li>';
+
+        ulResult.innerHTML = result;
+    </script>
+
+</body>
+</html>

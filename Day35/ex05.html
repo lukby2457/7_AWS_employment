@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex05.html</title>
+</head>
+<body>
+    <h1></h1>
+    <hr>
+
+    <ol>
+        <li>prompt() : 사용자가 입력한 데이터를 문자열로 반환</li>
+        <li>confirm() : 확인/취소 입력문. true/false를 반환</li>
+    </ol>
+
+    <h4>결과</h4>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        var con = confirm('동의 하시겠습니까?')
+        var prm = prompt('숫자를 입력하세요');
+        var cstN = Number(prm);
+        var cstS = String(10 + 5);
+
+        console.log('con = ' + con)
+
+        // var result = '<li>con = ' + con + '</li>';
+        var result = 
+        `<li>con = ${con} (※ type = ${typeof con})</li>` +
+        `<li>prm = ${prm} (※ type = ${typeof prm})</li>` + 
+        `<li>cstN = ${cstN} (※ type = ${typeof cstN})</li>` + 
+        `<li>cstS = ${cstS} (※ type = ${typeof cstS})</li>`;
+
+
+        document.getElementsByTagName('ul')[0].innerHTML = result;
+    </script>
+
+</body>
+</html>

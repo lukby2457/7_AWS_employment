@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex02.html</title>
+</head>
+<body>
+    <h1>페이지에 출력</h1>
+    <hr>
+
+    <h4>Hello</h4>  <!-- [0] -->
+    <h4>World</h4>  <!-- [1] -->
+    <h4></h4>       <!-- [2] : 퀴즈. 여기에 'Quiz'라는 내용을 출력하세요 -->
+
+    <script>
+        // 아래 구문은 DOM이라고 하여 뒤에 배우는 JS 내장 객체이다
+        // ※ 지금은 참고만 한다
+        document.getElementsByTagName('h4')[0].innerHTML = '안녕';
+        document.getElementsByTagName('h4')[1].innerHTML = '월드';
+        document.getElementsByTagName('h4')[1].style.color = 'red';
+        document.getElementsByTagName('h4')[1].style.padding = '10px 20px';
+        document.getElementsByTagName('h4')[1].style.backgroundColor = 'black';
+
+        // 퀴즈
+        // ※ 문자열로 작성한 태그도 그대로 추가된다
+        document.getElementsByTagName('h4')[2].innerHTML = '<a href="https://www.naver.com/">Quiz</a>';
+    </script>
+
+</body>
+</html>

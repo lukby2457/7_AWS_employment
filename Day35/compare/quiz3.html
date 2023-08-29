@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            /* background-color: orange; */
+            height: 135px;
+            display: flex;
+            justify-content: space-between;
+        }
+        header > div > img {
+            width: 300px;
+        }
+        nav {
+            /* background-color: greenyellow; */
+            width: 60%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav > div {
+            width: 33%;
+            text-align: center;
+        }
+        main {
+            /* height: 1000px; */
+            display: flex;
+            flex-direction: column;
+        }
+        main > div {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+        }
+        .container {
+            width: 1200px;
+            height: 550px;
+            overflow: hidden;
+            position: relative;
+        }
+        .container img {
+            width: 1200px;
+            padding: 0;
+        }
+        .slider {
+            display: flex;
+            animation: flow 12s linear infinite;
+        }
+        /* .container > div {
+            position: absolute;
+            color: red;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container > div > div {
+            padding: 10px 100px;
+            background-color: lightgray;
+
+        } */
+
+        @keyframes flow {
+            12.5% {
+                transform: translate(0);
+            }
+            25% {
+                transform: translate(-1200px);
+            }
+            37.5% {
+                transform: translate(-1200px);
+            }
+            50% {
+                transform: translate(-2400px);
+            }
+            62.5% {
+                transform: translate(-2400px);
+            }
+            75% {
+                transform: translate(-1200px);
+            }
+            87.5% {
+                transform: translate(-1200px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+        .table {
+            width: 50%;
+            height: 250px;
+            text-align: center;
+            color: grey;
+            display: flex;
+            flex-direction: column;
+        }
+        .table > div {
+            margin: 0 59px;
+        }
+        .table > div > .contable {
+            margin: 0;
+        }
+        .table > div > table {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px 0;
+        }
+        td {
+            text-align: left;
+        }
+        tbody > tr:nth-child(2n + 1) {
+            background-color: lightgray;
+        }
+        .img {
+            width: 50%;
+            text-align: center;
+            color: grey;
+        }
+        .img > div > h3 {
+            margin: 35px;
+        }
+        .image {
+            height: 300px;
+            /* background-color: aquamarine; */
+            display: flex;
+            justify-content: center;
+        }
+        .image > div {
+            /* background-color: aquamarine; */
+            width: 20%;
+            margin: 0 30px;
+        }
+        footer {
+            background-color: rgb(91, 140, 214);
+            height: 120px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+        footer > div {
+            width: 15%;
+            text-align: center;
+            padding: 45px 0;
+        }
+        .summary {
+            width: 50%;
+            text-align: left;
+            padding: 0;
+            margin: 5px 0;
+        }
+        .summary > p {
+            margin: 0;
+        }
+        .submenu {
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+        }
+        .submenu > img {
+            width: 150px;
+            height: 150px;
+            margin: 0 40px;
+        }
+        .submenu > div {
+            margin: 0 65px;
+            width: 80px;
+            background-color: gray;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="quizImg/Logo.png">
+        </div>
+        <nav>
+            <div>여행가이드 소개</div>
+            <div>국내여행지</div>
+            <div>해외여행지</div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="slider">
+                <div><img src="quizImg/first.jpg" alt=""></div>
+                <div><img src="quizImg/second.jpg" alt=""></div>
+                <div><img src="quizImg/third.jpg" alt=""></div>
+            </div>
+            <div>
+                <div>여행가이드에 오신것을 환영합니다</div>
+            </div>
+        </div>
+        <div>
+            <div class="table">
+                <div>
+                    <h3>공지사항</h3>
+                </div>
+                <div class="contable">
+                    <table>
+                        <thead>
+                            <th>내용</th>
+                            <th>날짜</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>다도해 풍광을 한눈에... 해남 땅끝 해안누리길 여행하기</td>
+                                <td>2018-01-10</td>
+                            </tr>
+                            <tr>
+                                <td>국토순례 기차여행에 참가하는 학교, 청소년 단체 등...</td>
+                                <td>2017-12-21</td>
+                            </tr>
+                            <tr>
+                                <td>설악산 1월초 설경 절정, 기차 여행 상품이 출시되었...</td>
+                                <td>2017-12-15</td>
+                            </tr>
+                            <tr>
+                                <td>여행가이드가 추천하는 국내 겨울여행지 & 관광열차</td>
+                                <td>2017-12-07</td>
+                            </tr>
+                            <tr>
+                                <td>신나는 겨울여행 대관령 눈꽃축제, 고니골 빛축제로..</td>
+                                <td>2017-12-01</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="img">
+                <div>
+                    <h3>정보나눔</h3>
+                </div>
+                <div class="info">
+                    <img src="quizImg/info.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="image">
+            <div class="submenu">
+                <img src="quizImg/news.png">
+                <div>새소식</div>
+            </div>
+            <div class="submenu">
+                <img src="quizImg/travelmusic.png" alt="">
+                <div>여행음악</div>
+            </div>
+            <div class="submenu">
+                <img src="quizImg/travelmanual.png" alt="">
+                <div>여행매뉴얼</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>법적고지</div>
+        <div>개인정보취급방침</div>
+        <div>개인정보처리방침</div>
+        <div class="summary">
+            <p>상호명:(주)앤윤컴퍼니</p>
+            <p>대표자:윤정우</p>
+            <p>개인정보관리책임자:김선정</p>
+            <p>상담전화:1588-0789</p>
+            <p>사업장주소:서울특별시 금천구 가산동 가산디지털2로</p>
+        </div>
+    </footer>
+</body>
+</html>
