@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단 표</title>
+    <style>
+        .container > div {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 10px;
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>구구단 표</h1>
+
+    <div class="container">
+        
+    </div>
+
+    <!-- <script>
+        let pos = 0;
+        let dan = 2;
+        let result = "";
+
+        while (pos <= 9){
+            for (let i = dan; i <= 9; i++) {
+                for(let j = 1; j <= 9; j++) {
+                    result += `${i} x ${j} = ${i*j}<br>`;
+                    console.log(pos + ' : ' + result)
+                    document.getElementsByTagName('p')[pos].innerHTML = result;
+                    result = "";
+                }
+                pos++;
+            }
+        }
+        
+    </script> -->
+
+    <script>
+        let result = "";
+
+        for (let i = 2; i <= 9; i++) {
+            result += "<div>";
+            result += `<h3>${i}단</h3>`;
+                
+            for (let j = 1; j <= 9; j++) {
+                result += `${i} x ${j} = ${2 * j}<br>`;
+            }
+                
+            result += "</div>"        
+        }
+
+        document.getElementsByTagName('div')[0].innerHTML = result;
+    </script>
+</body>
+</html>

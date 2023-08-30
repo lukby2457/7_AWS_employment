@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz4.html</title>
+</head>
+<body>
+    <h1>Quiz4</h1>
+    <hr>
+
+    <h3>1. 1 ~ n까지 일렬로 출력</h3>
+    <p></p>
+
+    <h3>2. n ~ 1까지 일렬로 출력</h3>
+    <p></p>
+
+    <h3>3. 1 ~ n까지 합계 출력</h3>
+    <p></p>
+
+    <h3>4. n * n 별 찍기 출력</h3>
+    <p></p>
+
+    <script>
+        let n = Number(prompt('n'));
+        let result = "";
+        let sum = 0;
+
+        // 1.
+        for(let i = 1; i <= n; i++) {
+            result += `${i} `
+        }
+        document.getElementsByTagName('p')[0].innerHTML = result;
+        result = "";
+
+        // 2.
+        for(let i = n; i > 0; i--) {
+            result += `${i} `
+        }
+        document.getElementsByTagName('p')[1].innerHTML = result;
+        result = "";
+
+        // 3. 
+        for(let i = 1; i <= n; i++) {
+            sum += i;
+        }
+        document.getElementsByTagName('p')[2].innerHTML = sum;
+
+        // 4. 
+        for(let i = 1; i <= n; i++) {
+            for(let j = 1; j <= i; j++) {
+                result += '*';
+            }
+            result += '<br>'
+        }
+        document.getElementsByTagName('p')[3].innerHTML = result;
+
+    </script>
+</body>
+</html>

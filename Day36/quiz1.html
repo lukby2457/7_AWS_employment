@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz1.html</title>
+</head>
+<body>
+    <h1>Quiz1</h1>
+    <hr>
+
+    <h4>1. 정수를 입력해서 3과 5의 공배수인지 판별</h4>
+
+    <ul>
+
+    </ul>
+
+    <h4>2. 정수를 입력 받아서 절대값을 출력</h4>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        var n1 = Number(prompt('정수를 입력하세요'));
+        
+        var p1 = (n1 % 3 == 0)&&(n1 % 5 == 0)
+        var msg1 = `<li>${n1}은 3과 5의 공배수인가 : ${p1}</li>`;
+        document.getElementsByTagName('ul')[0].innerHTML = msg1;
+
+        var p2 = (n1 < 0) ? -n1 : n1;
+        var msg2 = `<li>${n1}의 절대값 : ${p2}</li>`;
+        document.getElementsByTagName('ul')[1].innerHTML = msg2;
+    </script>
+
+</body>
+</html>

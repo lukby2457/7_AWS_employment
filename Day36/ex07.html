@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex07.html</title>
+</head>
+<body>
+    <h1>제어문</h1>
+    <hr>
+
+    <ol>
+        <li>조건문 : if ~ else if ~ else</li>
+        <li>반복문 : while, for</li>
+        <li>보조 제어문 : break, continue</li>
+    </ol>
+
+    <p>
+        var : 전역변수 선언. if안에 있어도 전역으로 처리된다<br>
+        let : 지역변수 선언
+    </p>
+
+    <h4></h4>
+
+    <script>
+        let age = 19;
+
+        if (age >= 20) {
+            let result = '성인';
+            var msg = `${result} 입니다`;
+        }
+        else {
+            result = '미성년자';
+            msg = `${result} 입니다`;
+        }
+
+        console.log(msg);
+        document.getElementsByTagName('h4')[0].innerHTML = msg;
+    </script>
+
+</body>
+</html>

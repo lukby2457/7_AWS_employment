@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz2.html</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th {
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz2</h1>
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">2단</th>
+            </tr>
+        </thead>
+        <tbody class="dan">
+            
+        </tbody>
+    </table>
+
+    <script>
+        let dan = 2;
+        let msg = "";
+        var tbody = document.getElementsByClassName('dan')[0];
+
+        for(let i = 1; i <= 9; i++){
+            msg += 
+            `<tr>
+                <th>${dan} x ${i}</th>
+                <th>${dan * i}</th>
+            </tr>`;
+        }
+        tbody.innerHTML = msg;
+    </script>
+</body>
+</html>

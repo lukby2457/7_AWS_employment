@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex08.html</title>
+</head>
+<body>
+    <h1>제어문</h1>
+    <hr>
+
+    <ul>
+        <li>if : 조건식이 참이면 수행. 단독 사용 가능</li>
+        <li>else if : 위의 조건이 거짓이면 조건 검사. if의 보조 구문</li>
+        <li>else : 위의 조건이 모두 거짓이면 수행. if의 보조 구문</li>
+    </ul>
+
+    <h4></h4>
+
+    <script>
+        let age = 18;
+        let result;
+
+        if (age >= 20) {
+            result = '성인';
+        }
+        else if (age >= 17) {
+            result = '고등학생'
+        }
+        else if (age >= 14) {
+            result = '중학생'
+        }
+        else {
+            result = '초등학생 이하'
+        }
+
+        result += ' 입니다';
+
+        document.getElementsByTagName('h4')[0].innerHTML = result;
+    </script>
+</body>
+</html>

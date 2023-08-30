@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex13.html</title>
+</head>
+<body>
+    <h1>함수</h1>
+    <hr>
+
+    <ul>
+        <li>전달인자 : 함수에 전달하는 데이터</li>
+        <li>매개변수 : 함수에 전달된 데이터를 저장하는 변수</li>
+    </ul>
+
+    <div>
+
+    </div>
+
+    <script>
+        function hello(n) {     // 매개변수
+            var msg = "<ul>";
+
+            for (let i = 1; i <= n; i++) {
+                msg += `<li>${i} : Hello World!!!</li>`;
+            }
+
+            msg += "</ul>";
+
+            document.getElementsByTagName('div')[0].innerHTML += msg;
+        }
+
+        hello(3);   // 전달인자
+
+        hello(1);
+
+        hello(6);
+    </script>
+</body>
+</html>

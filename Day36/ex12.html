@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>함수</h1>
+    <hr>
+
+    <ul>
+        <li>변수는 데이터를 저장하는 공간</li>
+        <li>함수는 일정 길이의 코드를 저장하는 공간</li>
+        <li>저장한 함수는 재사용이 가능하다</li>
+    </ul>
+
+    <div>
+
+    </div>
+
+    <button onclick="hello()">추가</button>
+
+    <script>
+        hello(); // hoisting. 익명함수나 즉시실행함수는 실행x
+
+        // 함수의 선언 : 실행할 코드가 저장된 공간
+        function hello() {
+            let result = "<ul>";
+
+            for(let i = 1; i <= 5; i++) {
+                result += `<li>${i} : Hello World!!!</li>`
+            }
+
+            result += "</ul>"
+
+            document.getElementsByTagName('div')[0].innerHTML += result;
+        }
+        
+        hello();    // 함수의 호출
+
+        hello();    // 함수는 여러번 재사용 가능
+    </script>
+
+</body>
+</html>

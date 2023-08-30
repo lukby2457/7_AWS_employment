@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex03.html</title>
+</head>
+<body>
+    <h1>JS 연산자</h1>
+    <hr>
+
+    <h4>증감 연산자</h4>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        var n1 = 10;
+        var n3 = n1++;
+        // 후치 : 다른 연산 후 증감 (대입 -> 증감)
+
+        var n2 = 10;
+        var n4 = ++n2;
+        // 전치 : 증감 후 다른 연산 (증감 -> 대입)
+
+        var result = 
+        `<li>n1 = ${n1}, n3 = ${n3}</li>` + 
+        `<li>n2 = ${n2}, n4 = ${n4}</li>`;
+
+        document.getElementsByTagName('ul')[0].innerHTML = result;
+
+        console.log(`n1 = ${n1}, n3 = ${n3}`);
+        console.log(`n2 = ${n2}, n4 = ${n4}`);
+    </script>
+
+</body>
+</html>
