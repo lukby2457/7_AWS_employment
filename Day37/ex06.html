@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex06.html</title>
+    <style>
+        img {
+            /* 기본값이 content-box */
+            box-sizing: border-box;
+            border: 5px solid white;
+            width: 180px;
+        }
+    </style>
+</head>
+<body>
+    <h1>이벤트 처리기</h1>
+    <hr>
+
+    <div>
+        <img src="img/dora.png" >
+    </div>
+
+    <script>
+        // function mouseOn() {
+        //     img.style.border = '5px solid black';
+        // }
+        // function mouseOff() {
+        //     img.style.border = '5px solid white';
+        // }
+        // css의 hover
+
+        let img = document.getElementsByTagName('img')[0];
+
+        // JS 코드 내에서 이벤트 처리를 걸 수 있다
+        img.onmouseover = function(e) {
+            // 이벤트 발생시 함수에 매개변수를 세팅하면 이벤트 객체를 받을 수 있다
+            // - 이벤트 객체 안에 target 속성은 이벤트가 발생한 요소를 담고 있다 (e.target = img)
+
+            e.target.style.border = '5px solid black';
+            // = img.style.border
+        };
+        img.onmouseout = (e) => {
+            e.target.style.border = '5px solid white';
+        };
+        img.onmousedown = (e) => {
+            e.target.style.border = '5px solid gold';
+            e.target.style.width = '200px';
+        }
+        img.onmouseup = (e) => {
+            e.target.style.border = '5px solid black';
+            e.target.style.width = '180px';
+        }
+        // let은 변할 우려가 있기 때문에 상수인 const를 사용한다
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz1.html</title>
+</head>
+<body>
+    <h1>Quiz1</h1>
+    <hr>
+
+    <h3>1. 절대값을 반환하는 함수</h3>
+    <p></p>
+
+    <h3>2. 1 ~ n까지의 곱을 반환하는 함수</h3>
+    <p></p>
+
+    <h3>3. 전달한 숫자를 거꾸로 반환하는 함수</h3>
+    <p></p>
+
+    <script>
+        // 매번 document.xxx 형식으로 사용하려니 너무 길어서 불변하다
+        // - java에서 인스턴스를 참조변수에 저장하고 재사용하듯
+        // - js에서 찾은 요소를 변수에 저장 시켜놓고 쓰면 작성도 조금 편해지고 가독성도 확보됨
+        var pass = document.getElementsByTagName('p');
+
+        // 1. 
+        let n1 = -123;
+        function abs(n) {
+            if(n < 0) {
+                n = n * -1;
+            }
+            return n
+        }
+
+        let ab = abs(n1);
+        pass[0].innerHTML = `${n1}의 절대값 : ${ab}`;
+
+        // 2. 
+        let n2 = 10;
+        function mul(n) {
+            let m1 = 1;
+            for(let i = 1; i <= n; i++) {
+                m1 *= i;
+            }
+            return m1;
+        }
+
+        let result = mul(n2);
+        pass[1].innerHTML = `${n2} 팩토리얼 : ${result}`;
+
+        // 3.
+        let n3 = 123456789;
+        function over(n) {
+            let o1 = 0;
+            while(n != 0) {
+                o1 = o1 * 10 + (n % 10);
+                n = parseInt(n / 10);
+                // console.log(o1, n);
+            }
+            return o1;
+        }
+
+        let rev = over(n3);
+        pass[2].innerHTML = `${n3} 뒤집은 결과 : ${rev}`; 
+    </script>
+
+</body>
+</html>

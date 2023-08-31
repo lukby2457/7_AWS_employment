@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex10.html</title>
+</head>
+<body>
+    <h1>객체</h1>
+    <hr>
+
+    <ul></ul>
+
+    <script src="js/person.js"></script>
+
+    <script>
+        let ul = document.getElementsByTagName('ul')[0];
+
+        ul.innerHTML = 
+            `<li>${per.name}</li>` + 
+            `<li>${per.age}세</li>` +
+            `<li>${per.show()}</li>` +
+            `<li>${per.eat('라면')}</li>`;
+        
+    </script>
+</body>
+</html>

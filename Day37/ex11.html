@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex11.html</title>
+</head>
+<body>
+    <h1>클래스</h1>
+    <hr>
+
+    <ul>
+        <li>JS도 클래스를 작성 후 인스턴스를 만들 수 있다</li>
+        <li>접근 제어자는 따로 없고, 상속이 가능하다</li>
+    </ul>
+
+    <ol></ol>
+
+    <ol></ol>
+
+    <script src="js/student.js"></script>
+
+    <script>
+        let ol = document.getElementsByTagName('ol');
+
+        let stu1 = new Student('홍길동', 70);
+        let stu2 = new Student('김민지', 78);
+        
+        ol[0].innerHTML = 
+            `<li>${stu1.name}</li>` +
+            `<li>${stu1.score}</li>` +
+            `<li>${stu1.show()}</li>`;
+
+        ol[1].innerHTML = 
+            `<li>${stu2.name}</li>` +
+            `<li>${stu2.score}</li>` +
+            `<li>${stu2.show()}</li>`;
+    </script>
+    
+</body>
+</html>

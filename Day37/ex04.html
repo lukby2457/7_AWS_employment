@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04.html</title>
+    <style>
+        img {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>이벤트 처리기(= 핸들러)</h1>
+    <hr>
+
+    <h4>앞서 배운 이벤트 발생시 처리 함수를 연결해 주는 것을 의미</h4>
+
+    <p onclick="alert('p 클릭 했습니다')">
+        <button onclick="alert('button 클릭했습니다')">클릭</button>
+        <!-- on + 이벤트="script 함수"-->
+    </p>
+    <!-- p : top, button : bottom. 가장 안쪽에서 이벤트가 거슬러 올라온다 -->
+    <!-- capturing, bubbling -->
+
+    <p>
+        <img src="img/dora.png" onmouseout="confirm('이미지에서 마우스를 뺌')">
+    </p>
+
+</body>
+</html>

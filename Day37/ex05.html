@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex05.html</title>
+</head>
+<body>
+    <h1>이벤트 처리기</h1>
+    <hr>
+
+    <div>
+
+    </div>
+
+    <button onclick="ulAdd()">추가</button>
+
+    <p>이벤트 처리기는 on</p>
+
+    <script>
+        function ulAdd() {
+            let result = "<ul>";
+
+            for (let i = 1; i <= 3; i++) {
+                result += "<li>Event</li>"
+            }
+
+            result += "</ul>"
+
+            document.getElementsByTagName('div')[0].innerHTML += result;
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz3.html</title>
+</head>
+<body>
+    <h1>Quiz3</h1>
+    <hr>
+
+    <h4>아래 Car 클래스의 객체를 작성 후 정보를 출력</h4>
+    <p>단, Car클래스는 js/car.js에 작성할 것</p>
+
+    <ul>
+        <li>모닝 (30km/h)</li>
+        <li>10km/h 가속 (현재 40km/h)</li>
+        <li>20km/h 감속 (현재 20km/h)</li>
+    </ul>
+
+    <ul></ul>
+
+    <script src="js/car.js"></script>
+
+    <script>
+        let ul = document.getElementsByTagName('ul')[1];
+        let car = new Car('모닝', 30);
+
+        ul.innerHTML = 
+        `<li>${car.show()}</li>` +
+        `<li>${car.accel(10)}</li>` +
+        `<li>${car.break(20)}</li>`;
+    </script>
+</body>
+</html>

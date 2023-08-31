@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex02.html</title>
+</head>
+<body>
+    <h1>JS 함수 종류</h1>
+    <hr>
+
+    <ol>
+        <li>일반 함수 : 저장하고 재사용할 수 있는 함수</li>
+        <li>콜백 함수 : 다른 함수의 전달인자로 사용되는 함수</li>
+        <li>즉시 실행 함수 : 저장하지 않고 바로 실행되는 함수</li>
+        <li>익명 함수 : 이름 없는 함수로, 즉시 실행 / 콜백 함수를 받아서 사용</li>
+    </ol>
+
+    <h4>결과</h4>
+
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <p>children : 자식만 인식됨</p>
+    <p>childNodes : 자식 + \n도 인식됨</p>
+
+    <script>
+        let li = document.getElementsByTagName('ul')[0].children;
+
+        // 1. 일반 함수
+        function nomal(n) {
+            return `일반 함수 입니다. n = ${n}`;
+        }
+
+        li[0].innerHTML = nomal(10);
+
+        // 2. 콜백 함수
+        // - 다른 함수를 매개변수로 받아서 내부에서 사용
+        function callback(n) {          // n = nomal
+            return '콜백 : ' + n(30);   // - 즉, 함수가 저장됨
+        }
+
+        li[1].innerHTML = callback(nomal);
+
+        // 3. 즉시 실행 함수
+        // - 따로 호출이 필요없고 해당 위치에 도달시 바로 실행
+        (function (n) { // () : signature
+            li[2].innerHTML = '즉시 실행 함수 입니다. n = ' + n;
+        }) (20);        // () : 매개변수
+        
+        // ※ 즉시 실행 함수는 => (화살표) 표기로도 구현 가능
+        ((n) => {
+            li[3].innerHTML = '(화살표)즉시 실행 함수 입니다. n = ' + n;
+        }) (5);
+
+        // 4. 익명 함수
+        // - 함수의 이름이 없는 함수 (※ let anonymous는 변수명이다)
+        let anoymous = function(n) {
+            li[4].innerHTML = '익명 함수 입니다. n = ' + n;
+        }
+
+        anoymous(7);
+        // - 저장한 변수명으로 익명 함수 호출 가능
+        // - 위에서 본 callback의 매개변수가 사실 '익명 함수'
+
+    </script>
+
+</body>
+</html>
