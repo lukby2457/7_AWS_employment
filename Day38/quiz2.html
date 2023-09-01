@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz2.html</title>
+    <style>
+        #input {
+            display: flex;
+            flex-direction: column;
+        }
+        #input > * {
+            width: 200px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz2</h1>
+    <hr>
+
+    <h4>아래 입력한 정보를 화면에 출력</h4>
+
+    <div id="input">
+        <input type="text" name="name" placeholder="이름">
+        <input type="number" name="kor" placeholder="국어">
+        <input type="number" name="eng" placeholder="영어">
+        <input type="number" name="mat" placeholder="수학">
+
+        <button>전송</button>
+    </div>
+
+    <hr>
+
+    <h4>결과</h4>
+    <div>
+        <p class="result"></p>
+        <p class="result"></p>
+    </div>
+
+    <script>
+        document.querySelector('button').onclick = () => {
+            // let name = document.getElementsByName('name')[0].value;
+            // let kor = Number(document.getElementsByName('kor')[0].value);
+            // let eng = Number(document.getElementsByName('eng')[0].value);
+            // let mat = Number(document.getElementsByName('mat')[0].value);
+
+            let input = document.querySelector('#input');
+            let child = input.children;
+            
+            let name, kor, eng, mat;
+            name = child[0].value; 
+            kor = Number(child[1].value); 
+            eng = Number(child[2].value); 
+            mat = Number(child[3].value); 
+
+            let result1 = `${name} : (국 ${kor}, 영 ${eng}, 수 ${mat})`;
+
+            let result = document.querySelectorAll('.result')
+            result[0].innerHTML = result1;
+
+            let sum = kor + eng + mat;
+            let avg = sum / 3;
+
+            let result2 = `성적 합계 : ${sum}, 평균 : ${avg}`;
+            result[1].innerHTML = result2;
+        }
+    </script>
+
+</body>
+</html>

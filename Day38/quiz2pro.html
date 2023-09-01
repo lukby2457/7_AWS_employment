@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz2.html</title>
+    <style>
+        #input {
+            display: flex;
+            flex-direction: column;
+        }
+        #input > * {
+            width: 200px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz2</h1>
+    <hr>
+
+    <h4>아래 입력한 정보를 화면에 출력</h4>
+
+    <div id="input">
+        <input name="name" type="text" placeholder="이름">
+        <input name="kor" type="number" placeholder="국어">
+        <input name="eng" type="number" placeholder="영어">
+        <input name="mat" type="number" placeholder="수학">
+
+        <button>전송</button>
+    </div>
+
+    <hr>
+
+    <h4>결과</h4>
+
+    <div id="result"></div>
+
+    <script>
+        document.querySelector('button').onclick = () => {
+            let input = document.querySelector('#input');
+            let child = input.children;
+
+            let msg = `<p>${child[0].value}</p>`;
+            let sum = 0;
+
+            for (let i = 1; i < child.length - 1; i++) {
+                msg += `<p>${child[i].value}</p>`;
+                sum += Number(child[i].value);
+            }
+
+            msg += `<p>${sum} (${sum / 3})</p>`;
+
+            document.querySelector('#result').innerHTML = msg;
+        }
+        
+        let test = document.getElementsByName('name')[0];
+        let target = document.getElementsByName('mat')[0];
+
+        test.onfocus = () => {
+            console.log('선택함');
+        }
+        test.onblur = () => {
+            console.log('빠져나감');
+            target.focus();
+        }
+    </script>
+
+</body>
+</html>

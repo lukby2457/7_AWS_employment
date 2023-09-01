@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04.html</title>
+</head>
+<body>
+    <h1>요소 속성 조작</h1>
+    <hr>
+
+    <h4>Hello JS!!!</h4>
+
+    <script>
+        let h4 = document.getElementsByTagName('h4')[0];
+
+        h4.onmouseover = (e) => {
+            e.target.style.color = 'red';
+        }
+
+        h4.addEventListener('mouseout', (e) => {
+            e.target.style.color = 'black';
+        })
+    </script>
+
+</body>
+</html>

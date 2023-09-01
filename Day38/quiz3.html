@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz3.html</title>
+    <style>
+        #input {
+            display: flex;
+            flex-direction: column;
+        }
+        #input > * {
+            width: 200px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz3</h1>
+    <hr>
+
+    <h4>input의 값 가져오기 및 검증</h4>
+
+    <div id="input">
+        <input name="userid" type="text" placeholder="아이디" required>
+        <input name="userpw" type="password" placeholder="패스워드" required>
+        <input name="pwCheck" type="password" placeholder="패스워드 확인" required>
+        <input name="email" type="email" placeholder="이메일" required>
+
+        <button>가입</button>
+
+        <h5 style="color: red; display: none;">PW가 일치하지 않습니다!!!1</h5>
+    </div>
+
+    <div>
+        
+    </div>
+
+    <!-- <script>
+        document.querySelector('button').onclick = () => {
+            let userpw = document.getElementsByName('userpw')[0].value;
+            let pwCheck = document.getElementsByName('pwCheck')[0].value;
+            let target = document.querySelectorAll('#input > input')[1];
+            let msg = "가입 성공";
+
+            if(userpw == pwCheck) {
+                document.querySelectorAll('div')[1].innerHTML = msg;
+            }
+            else{
+                msg = "패스워드와 확인이 동일하지 않습니다"
+                document.querySelectorAll('div')[1].innerHTML = msg;
+                target.focus();
+            }
+        }
+    </script> -->
+
+    <script>
+        let child = document.querySelector('#input').children;
+
+        let userpw = child[1].value;
+        let pwCheck = child[2].value;
+
+        let msg = "가입 성공"
+
+        child[2].onblur = () => {
+            if(child[1].value != child[2].value) {
+                child[1].value = child[2].value = '';
+                child[1].focus();
+
+                child[5].style.display = 'block'
+            }
+            else{
+                child[5].style.display = 'none'
+            }
+        }
+
+        document.querySelector('button').onclick = () => {
+            document.getElementsByTagName('div')[1].innerHTML = msg;
+        }
+    </script>
+
+</body>
+</html>

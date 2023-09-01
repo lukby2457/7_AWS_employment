@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex01.html</title>
+</head>
+<body>
+    <h1>배열</h1>
+    <hr>
+
+    <h4>여러 데이터를 저장하기 위한 공간</h4>
+
+    <ul></ul>
+
+    <h4>F12 콘솔도 확인</h4>
+
+    <script>
+        let arr1 = new Array();
+
+        let arr2 = new Array('HTML', 'CSS', 'JS');
+
+        let arr3 = ['JSP', 'PHP', 'ASP'];
+
+
+        let ul = document.getElementsByTagName('ul')[0];
+
+        ul.innerHTML += 
+            `<li>arr1 = ${arr1}</li>` + 
+            `<li>arr2 = ${arr2}</li>` + 
+            `<li>arr3 = ${arr3}</li>` + 
+            `<li>arr3의 크기 = ${arr3.length}</li>`;
+
+        for (let i = 0; i < arr3.length; i++) {
+            console.log(`arr3[${i}] = ${arr3[i]}`);
+        };
+    </script>
+
+</body>
+</html>

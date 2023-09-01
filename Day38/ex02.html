@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex02.html</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>DOM</h1>
+    <hr>
+
+    <h4>Document Object Model</h4>
+
+    <ul>
+        <li>문서 객체 모델</li>
+        <li>웹 문서의 모든 요소를 JS로 처리할 수 있게 만들어둔 객체</li>
+    </ul>
+
+    <h4>DOM으로 요소를 찾아내는 여러가지 방법</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>getElementById</th>
+                <td>id 선택장로 요소를 접근</td>
+            </tr>
+            <tr>
+                <th>getElementsByClassName</th>
+                <td>class 선택자로 요소를 접근</td>
+            </tr>
+            <tr>
+                <th>getElementsByName</th>
+                <td>태그의 name="" 속성으로 요소를 접근</td>
+            </tr>
+            <tr>
+                <th>getElementsByTagName</th>
+                <td>태그 선택자로 요소를 접근</td>
+            </tr>
+            <tr>
+                <th>querySelector</th>
+                <td>다양한(ID,NAME,TAGNAME) 방법으로 요소를 접근 (한개만 접근)</td>
+            </tr>
+            <tr>
+                <th>querySelectorAll</th>
+                <td>다양한 방법으로 요소를 접근 (여러개 접근)</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <hr>
+
+    <p id="html">ID : 고유속성이라 중복되면 위의 것만 출력된다</p>
+    <p class="css">Class</p>
+    <p class="css">Class : 반환값이 HTMLCollection</p>
+    <p name="js">Name : 반환값이 NodeList. 태그의 이름을 찾는 것이 아니다.</p>
+    <p>TagName</p>
+
+</body>
+</html>
