@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex05.html</title>
+    <style>
+        .container {
+            width: 400px;
+            overflow: hidden;
+        }
+        .container img {
+            width: 400px;
+        }
+        .slider {
+            display: flex;
+            transition: all 3s;
+        }
+        /* .slider:hover {
+            transform: translate(-400px);
+        } */
+
+        .button {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 슬라이드</h1>
+    <hr>
+
+    <div class="container">
+        <div class="slider">
+            <div><img src="img/first.jpg" alt=""></div>
+            <div><img src="img/second.jpg" alt=""></div>
+            <div><img src="img/third.jpg" alt=""></div>
+        </div>
+        <div class="button">
+            <button>이전</button>
+            <button>다음</button>
+        </div>
+    </div>
+
+    <script>
+        let container = document.querySelector('.container').children;
+        let btn = container[1].querySelectorAll('button');
+        let prev = btn[0];
+        let next = btn[1];
+        let size = 400, count = 0;
+        let end = container[0].children.length - 1;
+
+        prev.onclick = () => {
+            if(count > 0) {
+                count--;
+                container[0].style.transform = 'translate(-' + size * count +'px)';
+            }
+        }
+        next.onclick = () => {
+            if(count < end) {
+                count++;
+                container[0].style.transform = 'translate(-' + size * count + 'px)';
+            }
+        }
+    </script>
+</body>
+</html>

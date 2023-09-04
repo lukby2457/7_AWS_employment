@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex02.html</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>키보드 이벤트</h1>
+    <hr>
+
+    <table>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let test = document.querySelector('table');
+        let x = 0;
+        let y = 0;
+        let tr = test.querySelectorAll('tr');
+        let td = tr[x].querySelectorAll('td');
+        let msg = '범위 초과'
+        
+        function rev(x, y) {
+            let pos = test.querySelectorAll('tr')[x].querySelectorAll('td')[y];
+            return pos.style.backgroundColor = 'white';
+        }
+
+        function show(x,y) {
+            let pos = test.querySelectorAll('tr')[x].querySelectorAll('td')[y];
+            return pos.style.backgroundColor = 'red';
+        }
+        
+        show(0, 0);
+        document.body.onkeydown = (e) => {
+            if(e.key == 'ArrowRight') {
+                if(y <= td.length - 2) {
+                    y += 1;
+                    console.log(x, y)
+                    rev(x, y-1)
+                    show(x, y)
+                }
+                else {
+                    console.log(msg);
+                }
+            }
+            if(e.key == 'ArrowLeft') {
+                if(y > 0) {
+                    y -= 1;
+                    console.log(x, y)
+                    rev(x, y+1)
+                    show(x, y)
+                }
+                else {
+                    console.log(msg)
+                }
+            }
+            if(e.key == 'ArrowUp') {
+                if(x > 0) {
+                    x -= 1;
+                    console.log(x, y)
+                   rev(x+1, y)
+                    show(x, y)
+                }
+                else {
+                    console.log(msg)
+                }
+            }
+            if(e.key == 'ArrowDown') {
+                if(x <= tr.length - 2) {
+                    x += 1;
+                    console.log(x, y)
+                    rev(x-1, y)
+                    show(x, y)
+                }
+                else {
+                    console.log(msg)
+                }
+            }
+        }
+    </script>
+</body>
+</html>

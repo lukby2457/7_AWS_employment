@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex03.html</title>
+</head>
+<body>
+    <h1>노드 생성</h1>
+    <hr>
+
+    <h4><!-- 여기에 노드 추가해 보세요 --></h4>
+
+    <script>
+        let test = document.createElement('div');
+        test.innerHTML = 'JS에서 생성한 노드 입니다~';
+        test.setAttribute('id', 'jsNode');
+        test.style.color = 'red';
+
+        let h4 = document.querySelector('h4');
+        let test2 = document.createElement('p');
+        test2.innerHTML = 'menu';
+        test2.setAttribute('class', 'menu');
+        test2.style.color = 'green';
+        
+        document.body.appendChild(test);
+        h4.appendChild(test2);
+    </script>
+
+</body>
+</html>

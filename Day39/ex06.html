@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex06.html</title>
+    <style>
+        .container {
+            width: 400px;
+            overflow: hidden;
+        }
+        .container img {
+            width: 400px;
+        }
+        .slider {
+            display: flex;
+            /* animation: flow 5s ease infinite; */
+        }
+
+        @keyframes flow {
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 슬라이드</h1>
+    <hr>
+
+    <div class="container">
+        <div class="slider">
+            <div><img src="img/first.jpg" alt=""></div>
+            <div><img src="img/second.jpg" alt=""></div>
+            <div><img src="img/third.jpg" alt=""></div>
+            <div><img src="img/first.jpg" alt=""></div>
+            <div><img src="img/second.jpg" alt=""></div>
+            <div><img src="img/third.jpg" alt=""></div>
+            <div><img src="img/first.jpg" alt=""></div>
+            <div><img src="img/second.jpg" alt=""></div>
+            <div><img src="img/third.jpg" alt=""></div>
+        </div>
+    </div>
+
+    <script>
+        let container = document.querySelector('.container').children;
+        let size = 400;
+        let count = container[0].children.length;
+        let css = document.styleSheets[0].cssRules[3];
+
+        document.styleSheets[0].cssRules[2].style.animation = 'flow ' + count + 's ease infinite';
+
+        for(let i = 0; i < count; i++) {
+            css.appendRule((100 / count) * (i+1) + '% {transform: translate(-' + (size * i) + 'px);}')
+        }
+        
+    </script>
+
+</body>
+</html>

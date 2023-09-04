@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04.html</title>
+    <style>
+        h4 {
+            color: blue;
+        }
+        p {
+            font-family: consolas;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS 조작</h1>
+    <hr>
+
+    <div class="target">
+        <h4>Hello~</h4>
+
+        <p>World!</p>
+    </div>
+
+    <button>JS 실행!!!</button>
+
+    <script>
+        let btn = document.querySelector('button');
+        
+        btn.onclick = () => {
+            let target = document.querySelector('.target').children;
+            let css = document.styleSheets[0];
+
+            css.cssRules[0].style.color = 'red';
+            css.cssRules[1].style.fontSize = '200%';
+
+            css.addRule('button', 'border: 5px solid black')
+        }
+
+    </script>
+
+</body>
+</html>

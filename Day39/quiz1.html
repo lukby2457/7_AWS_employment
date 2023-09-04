@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            display: flex;
+            border : 1px solid #aeaeae;
+            width: 200px;
+        }
+        div > * {
+            border: 0;
+        }
+        div > input {
+            width: 80%;
+            outline: none;
+        }
+        div > button {
+            width: 20%;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>목록</h1>
+    <hr>
+
+    <h4>할일 (To Do)</h4>
+    <div>
+        <input type="text">
+        <button>등록</button>
+    </div>
+    <ul></ul>
+
+    <script>
+        let ul = document.querySelector('ul');
+        let button = document.querySelector('button');
+        
+        button.onclick = () => {
+            let msg = document.querySelector('input').value;
+            
+            let li = document.createElement('li');
+            li.innerHTML = msg;
+            console.log(li);
+            ul.appendChild(li);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex02.html</title>
+
+    <style>
+        .board {
+            border-collapse: collapse;
+        }
+        .board td {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>키보드 이벤트</h1>
+    <hr>
+
+    <table class="board">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script>
+        let line = document.querySelectorAll('.board tr');
+        let x = 0, y = 0;
+        let end = line.length - 1;
+
+        line[x].children[y].style.backgroundColor = 'red';
+
+
+        document.body.onkeydown = (e) => {
+            line[x].children[y].style.backgroundColor = 'white';
+            let nx = x, ny = y;
+
+            switch(e.key) {
+            case 'ArrowLeft':   ny--; break;
+            case 'ArrowUp':     nx--; break;
+            case 'ArrowRight':  ny++; break;
+            case 'ArrowDown':   nx++; break;
+            }
+
+            if (nx < 0 || ny < 0 || nx > end || ny > end) {
+                console.log('범위 초과!!!');
+            }
+            else {
+                x = nx;
+                y = ny;
+            }
+
+            console.log(`x = ${x}, y = ${y}`);
+
+            line[x].children[y].style.backgroundColor = 'red';
+        };
+
+    </script>
+    
+</body>
+</html>
