@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test2.html</title>
+</head>
+<body>
+    <fieldset>
+        <legend>입력 창</legend>
+
+        <p><input type="text" name="name" placeholder="이름"></p>
+        <p><input type="number" name="age" placeholder="나이"></p>
+
+        <button>전송</button>
+    </fieldset>
+
+    <script>
+        document.querySelector('button').onclick = () => {
+            let inputs = document.querySelectorAll('input');
+            window.opener.getPopup(inputs);
+            close();
+        }
+    </script>
+</body>
+</html>

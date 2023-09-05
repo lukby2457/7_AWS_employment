@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex03.html</title>
+</head>
+<body>
+    <h1>BOM</h1>
+    <hr>
+
+    <h4>Browser Object Model</h4>
+
+    <p>DOM : body 내</p>
+    <p>BOM : 브라우저 자체</p>
+
+    <ul>
+        <li>Window : 브라우저를 조작하는 객체. 최상위 객체</li>
+        <li>Document : DOM. 문서를 조작하는 객체</li>
+        <li>History : 방문 기록 정보를 조작하는 객체</li>
+        <li>Location : URL 정보를 가진 객체</li>
+    </ul>
+
+    <h4>Window 객체</h4>
+    <ul>
+        <li>innerHeight : 문서 높이. body 높이</li>
+        <li>innerWidth : 문서 너비. body 너비</li>
+        <li>outerHeight : 브라우저 높이</li>
+        <li>outerWidth : 브라우저 너비</li>
+        <li>moveTo(x, y) : 브라우저를 지정한 위치로 이동</li>
+        <li>open(url, target, option) : 새 브라우저를 오픈</li>
+        <li>close() : 브라우저를 종료</li>   
+        <li>resizeTo(x, y) : 지정한 크기로 변경</li>
+    </ul>
+
+    <button>새창</button>
+    <script>
+        document.querySelector('button').onclick = () => {
+            var newWin = open(
+                'https://www.naver.com',
+                '_blank', 
+                'top=100, left=100, width=500, height=500')
+        }
+    </script>
+
+</body>
+</html>

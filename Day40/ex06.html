@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex06.html</title>
+</head>
+<body>
+    <h1>팝업창 데이터 처리</h1>
+    <hr>
+
+    <h4>여기는 부모 창</h4>
+
+    <ul></ul>
+
+    <button>입력</button>
+
+    <script>
+        document.querySelector('button').onclick = () => {
+            let popup = open('popup/test1.html', '_blank', 
+                            'top=100, width=400, height=500');
+        };
+
+        function getPopUpData(data) {
+            let ul = document.querySelector('ul');
+            let result = '';
+
+            for (let i = 0; i < data.length; i++) {
+                result += "<li>";
+                result += data[i].value;
+                result += "</li>";
+            }
+
+            ul.innerHTML = result;
+        } 
+    </script>
+</body>
+</html>

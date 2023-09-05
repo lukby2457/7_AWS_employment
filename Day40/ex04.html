@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex04.html</title>
+</head>
+<body>
+    <h1>BOM</h1>
+    <hr>
+
+    <h4>History 객체</h4>
+
+    <ul>
+        <li>length : 히스토리 내역 개수</li>
+        <li>back() : 이전 내역으로</li>
+        <li>forward() : 다음 내역으로</li>
+        <li>go(n) : 지정 내역으로. 양수는 다음, 음수는 이전</li>
+    </ul>
+    
+    <button>이전</button>
+    <button>다음</button>
+    <button>지정 내역</button>
+
+    <script>
+        let btn = document.querySelectorAll('button');
+
+        btn[0].onclick = () => {
+            history.back();
+        }
+
+        btn[1].onclick = () => {
+            history.forward();
+        }
+
+        btn[2].onclick = () => {
+            let int = Number(prompt('페이지'));
+
+            btn[0].onclick = () => {
+                history.go(-int);
+            }
+
+            btn[1].onclick = () => {
+                history.go(int);
+            }
+        }
+
+    </script>
+
+</body>
+</html>

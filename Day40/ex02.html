@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        fieldset > form {
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        fieldset > legend {
+            font-size: 120%;
+            font-weight: bold;
+        }
+        form > input {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>메뉴 옮기기</h1>
+    <hr>
+
+    <br>
+    <fieldset>
+        <legend>사용자 정보</legend>
+        <form>
+            <input type="text" name="name" placeholder="이름 입력">
+            <input type="text" name="phone" placeholder="전화번호 입력">
+            <input type="text" name="address" placeholder="주소 입력">
+        </form>
+    </fieldset>
+
+    <br>
+
+    <fieldset>
+        <legend>주문 정보</legend>
+        <form>
+            <p>
+                <input type="checkbox" id="same">
+                <label for="same">사용자 정보와 동일</label>
+            </p>
+            <input type="text" name="name" placeholder="이름 입력">
+            <input type="text" name="phone" placeholder="전화번호 입력">
+            <input type="text" name="address" placeholder="주소 입력">
+        </form>
+    </fieldset>
+
+    <script>
+        let form = document.querySelectorAll('fieldset > form');
+        let input1 = form[0].children;
+        let input2 = form[1].children;
+        let checkbox = document.getElementById('same');
+
+        function is_checked() {
+            let checked = checkbox.checked;
+            return checked;
+        }
+
+        checkbox.onclick = (e) => {
+            // console.log('체크됨')
+            // console.log(is_checked())
+            let name = input1[0].value;
+            let phone = input1[1].value;
+            let address = input1[2].value;
+            if(is_checked()) {
+                // console.log(true)
+                input2[1].value = name;
+                input2[2].value = phone;
+                input2[3].value = address;
+            }
+            else {
+                // console.log(false)
+                input2[1].value = null;
+                input2[2].value = null;
+                input2[3].value = null; 
+            }
+        }
+        
+        // if(is_checked() == true) {
+        //     input2[1].setAttribute('value', name);
+        //     input2[2].setAttribute('value', phone);
+        //     input2[3].setAttribute('value', address);
+        // }
+    </script>
+
+</body>
+</html>

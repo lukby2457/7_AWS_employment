@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex05.html</title>
+</head>
+<body>
+    <h1>BOM</h1>
+    <hr>
+
+    <h4>Location 객체</h4>
+
+    <ul>
+        <li>host : URL의 주소와 포트</li>
+        <li>hostname : URL의 주소</li>
+        <li>port : URL의 포트</li>
+        <li>pathname : 파일 경로</li>
+        <li>href : 전체 URL</li>
+        <li>protocol : 프로토콜 이름</li>
+        <li>search : URL에 ?다음 부분</li>
+        <li>reload() : 새로고침</li>
+    </ul>
+
+    <button>새로고침</button>
+    <button>네이버</button>
+    <button>네이버(팝업)</button>
+
+    <script>
+        let btn = document.querySelectorAll('button');
+        
+        btn[0].onclick = () => {
+            location.reload();
+            alert('새로고침 되었습니다')
+        }
+        btn[1].onclick = () => {
+            location.href = 'https://www.naver.com/';
+        }
+        btn[2].onclick = () => {
+            let newWin = open(
+                'https://www.naver.com/', '_blank',
+                'top=100, left=100, width=1400, height=800'
+            )
+        }
+    </script>
+
+</body>
+</html>
