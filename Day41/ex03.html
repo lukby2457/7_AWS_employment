@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h4>11시부터 ~ 17시 이전 기준 날씨 예측 정보</h4>
+    <ul>
+        <!-- <li>0 : 오늘 오후</li>
+        <li>1 : 내일 오전</li>
+        <li>2 : 내일 오후</li>
+        <li>3 : 모레 오전</li>
+        <li>4 : 모레 오후</li>
+        <li>5 : 글피 오전</li>
+        <li>6 : 글피 오후</li> -->
+    </ul>
+
+    <ul></ul>
+
+    <table>
+        <thead>
+            <tr>
+                <th>지역</th>
+                <th>시간대</th>
+                <th>강수확률</th>
+                <th>기온</th>
+                <th>날씨상태</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script>
+        let url = 'https://apis.data.go.kr/1360000/VilageFcstMsgService/getLandFcst?serviceKey=UnhpQ0ZVqg9HEwU43CzQH5jLmSd5CZXVLBDQ2WetVG5LX66r%2BbkxiVwaxXGBZxmVjIqpWYwZe0CsR%2FNLkNJtQQ%3D%3D&pageNo=1&numOfRows=10&dataType=JSON&regId=11H20201';
+
+        fetch(url, {
+            method: 'get',
+        })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            // console.log(data.response);
+            // console.log(data.response.body);
+            // console.log(data.response.body.items);
+            // console.log(data.response.body.items.item);
+
+            // function timepan(n) {
+            //     let time = '';
+            //     if(n == 0) {
+            //         time = '오늘 오후'
+            //     }
+            //     else if(n == 1) {
+            //         time = '내일 오전'
+            //     }
+            //     else if(n == 2) {
+            //         time = '내일 오후'
+            //     }
+            //     else if(n == 3) {
+            //         time = '모레 오전'
+            //     }
+            //     else if(n == 4) {
+            //         time = '모레 오후'
+            //     }
+            //     else if(n == 5) {
+            //         time = '글피 오전'
+            //     }
+            //     else {
+            //         time = '글피 오후'
+            //     }
+            //     return time;
+            // };
+
+            numEfList = {
+                0: '오늘 오후',
+                1: '내일 오전',
+                2: '내일 오후',
+                3: '모레 오전',
+                4: '모레 오후',
+                5: '글피 오전',
+                6: '글피 오후'
+            };
+
+            data = data.response.body.items.item;
+
+            let msg = '';
+
+            for (let i = 0; i < data.length; i++) {
+                msg += `<li>부산 ${numEfList[data[i].numEf]} : 
+                    강수 ${data[i].rnSt}% / 
+                    섭씨 ${data[i].ta}°C / 
+                    ${data[i].wf}</li>`;
+            };
+            
+            document.querySelectorAll('ul')[1].innerHTML = msg;
+
+            let table = ''
+            
+            for(let i = 0; i < data.length; i++) {
+                table += 
+                `<tr><td>부산</td>
+                <td>${numEfList[data[i].numEf]}</td>
+                <td>${data[i].rnSt}%</td>
+                <td>${data[i].ta}°C</td>
+                <td>${data[i].wf}</td>`;
+                table += '</tr>';
+            }
+
+
+            document.getElementsByTagName('tbody')[0].innerHTML = table;
+        })
+    </script>
+</body>
+</html>

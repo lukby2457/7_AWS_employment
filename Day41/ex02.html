@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body></body>
+    <pre></pre>
+
+    <script>
+        let url = 'https://apis.data.go.kr/1360000/VilageFcstMsgService/getWthrSituation?serviceKey=UnhpQ0ZVqg9HEwU43CzQH5jLmSd5CZXVLBDQ2WetVG5LX66r%2BbkxiVwaxXGBZxmVjIqpWYwZe0CsR%2FNLkNJtQQ%3D%3D&pageNo=1&numOfRows=10&dataType=JSON&stnId=159';
+
+        fetch(url, {
+            method: 'get',
+        })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);  // data 전체 출력
+            // console.log(data.response); // data 안의 respose 출력
+            // console.log(data.response.body);    // response 안의 body 출력
+            // console.log(data.response.body.items);  // body 안의 items 출력
+            // console.log(data.response.body.items.item); // items 안의 item 출력
+            // console.log(data.response.body.items.item[0]);  // item의 0번 출력
+            // console.log(data.response.body.items.item[0].wfSv1);    // 0번의 wfSv1 출력
+
+            data = data.response.body.items.item[0];
+
+            document.querySelector('pre').innerHTML = data.wfSv1;
+
+        })
+        .catch(e => {
+            console.log(e);
+            console.log('요청 실패~');
+        })
+    </script>
+</body>
+</html>

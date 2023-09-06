@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test1.html</title>
+</head>
+<body>
+    <fieldset>
+        <legend>입력</legend>
+
+        <p><input type="text" name="userid" placeholder="아이디"></p>
+        <p><input type="password" name="userpw" placeholder="패스워드"></p>
+        <p><input type="text" name="nick" placeholder="닉네임"></p>
+        <p><input type="email" name="email" placeholder="이메일"></p>
+
+        <button>전송</button>
+    </fieldset>
+
+    <script>
+        document.querySelector('button').onclick = () => {
+            let url = 'http://localhost:8000/add/';
+
+            let sample = {
+                userid: 'RestTest',
+                userpw: '1234',
+                nick: '테스트입니다~',
+                email: 'restTest@naver.com',
+            }
+
+            fetch(url, {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(sample),
+            })
+            .then(response => response.json())
+            .then(data => {
+                cons.log(data);
+                alert(data.msg);
+            })
+            close();
+        }
+    </script>
+</body>
+</html>

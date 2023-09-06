@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+        div {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Django REST API Server</h1>
+    <hr>
+
+    <h4>서버는 수업자료/Test의 Django Project를 사용한다</h4>
+
+    <table>
+        <thead>
+            <tr>
+                <th>IDX</th>
+                <th>UserID</th>
+                <th>UserPW</th>
+                <th>Nick</th>
+                <th>Email</th>
+                <th>Join-Date</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div>
+        <button>입력</button>
+        <button>삭제</button>
+        <button>수정</button>
+    </div>
+
+    <script>
+        let btn = document.querySelectorAll('button');
+
+        let url = 'http://localhost:8000/';
+        fetch(url, {method: 'get'})
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+
+            let msg = '';
+
+            // for(let i = 0; i < data.length; i++) {
+            //     msg += `<li>${data[i].userid} : ${data[i].nick}</li>`;
+            // }
+
+            // document.querySelector('ul').innerHTML = msg;
+
+            for(let i = 0; i < data.length; i++) {
+                msg += 
+                `<tr><td>${data[i].id}</td>
+                <td>${data[i].userid}</td>
+                <td>${data[i].userpw}</td>
+                <td>${data[i].nick}</td>
+                <td>${data[i].email}</td>
+                <td>${data[i].jdate}</td></tr>`
+            }
+
+            document.querySelector('tbody').innerHTML = msg;
+        });
+
+        btn[0].onclick = () => {
+            let input = open('test1.html', '_blank',
+            'top=100, left=100, width=300, height=400')
+        };
+    </script>
+</body>
+</html>

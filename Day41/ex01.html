@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex01.html</title>
+</head>
+<body>
+    <p>API : Application Programming Interface</p>
+    <p>Interface : 대상 둘 사이에서 상호작용을 원활하게 해주는 것</p>
+    <p>UI : User Interface. 사용자가 사용하기 편하게 해주는 것</p>
+    <br>
+    <p>API : 프로그램 간 데이터를 주고 받을때 사용하는 규격</p>
+
+    <h1>REST</h1>
+    <hr>
+
+    <ul>
+        <li>Representational State Transfer</li>
+        <li>자원을 이름으로 구분하여 해당 자원의 상태를 주고 받는 것을 의미</li>
+        <li>Http Request Method인 GET, POST, PUT, DELETE를 통해서 자원을 주고 받는다</li>
+        <li>REST API는 이러한 REST 방식으로 다른이가 서버의 데이터를 사용할 수 있게 만들 Interface</li>
+    </ul>
+
+    <h4>휴게소 날씨 API</h4>
+
+    <ul></ul>
+    
+    <script>
+        let url = 'http://data.ex.co.kr/openapi/restinfo/restWeatherList?key=test&type=json&sdate=20230905&stdHour=10';
+        let ul = document.querySelectorAll('ul');
+        fetch(url, {
+            method: 'get',
+        }) // 비동기
+        .then(response => response.json())  // 앞의 것이 끝나면 실행됨
+        .then(data => {
+            console.log(data);
+            console.log(data.list);
+            console.log(data.list[0]);
+            console.log(`${data.list[0].unitName} - ${data.list[0].weatherContents}`);
+
+            let msg = '';
+
+            for(let i = 0; i < data.count; i++){
+                // console.log(`${data.list[i].unitName} - ${data.list[i].weatherContents}`);
+                msg += `<li>${data.list[i].unitName} - ${data.list[i].weatherContents} - ${data.list[i].tempValue}</li>`;
+            }
+            ul[1].innerHTML = msg;
+        })
+
+    </script>
+
+</body>
+</html>
