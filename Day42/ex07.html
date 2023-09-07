@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex07.html</title>
+</head>
+<body>
+    <h1>다양한 그래프들</h1>
+    <hr>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        let labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+
+        let month = [15, 14, 17, 18, 20, 23, 21];
+        let avg = [9, 10, 7, 8, 7, 9, 6];
+
+        let options = {                                  
+                          scales: {                               // 축의 구성을 설정
+                              y: {
+                                  beginAtZero: true,               // 맨 밑바닥을 0으로 설정
+                                  min: 0, 
+                                  max: 25, 
+                              },
+                            },
+                            ticks: {
+                              stepSize: 10
+                            }
+                      };
+
+        let datasets = [                             
+                            {
+                                type: 'bar',
+                                label: '월별 판매량',           // 데이터 종류
+                                data: avg,                    // 데이터 수치
+                            },
+                            {
+                                type: 'line',
+                                label: '평균',           // 데이터 종류
+                                data: month,                    // 데이터 수치
+                            }
+                        ];
+
+        // for(let i = 1; i <= 6; i++){
+        //     labels.push(i);     // 배열 추가 함수
+        // }
+        
+        new Chart(ctx, {                                // 차트 위치, {그릴 정보}
+            data: {                                     // 그래프에 출력할 정보
+                labels: labels,                         // X축에 대한 열 정보
+                datasets: datasets                      // 실제 데이터 정보들
+            },
+            options: options                            // 기타 설정 : 종류가 많다. API 공식 사이트를 찾아 보는 것을 권장
+        });
+    </script>
+</body>
+</html>

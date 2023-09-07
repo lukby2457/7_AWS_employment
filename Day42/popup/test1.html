@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test1.html</title>
+    <style>
+        .msg {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>입력</legend>
+
+        <p><input type="text" name="userid" placeholder="아이디"></p>
+        <p><input type="password" name="userpw" placeholder="패스워드"></p>
+        <p><input type="text" name="nick" placeholder="닉네임"></p>
+        <p><input type="email" name="email" placeholder="이메일"></p>
+
+        <button>전송</button>
+
+        <p class="msg"></p>
+    </fieldset>
+
+    <script>
+        document.querySelector('button').onclick = () => {
+            let url = 'http://localhost:8000/add/';
+
+            // let sample = {
+            //     userid: 'RestTest',
+            //     userpw: '1234',
+            //     nick: '테스트입니다~',
+            //     email: 'restTest@naver.com',
+            // }
+
+            let inputs = document.querySelectorAll('input');
+            let pUserid = inputs[0].value;
+            let pUserpw = inputs[1].value;
+            let pNick = inputs[2].value;
+            let pEmail = inputs[3].value;
+
+            let sample = {
+                userid: inputs[0].value,
+                userpw: pUserpw,
+                nick: pNick,
+                email: pEmail,
+            }
+
+            fetch(url, {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(sample),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert(data.msg);
+            })
+            close();
+        }
+
+        document.getElementsByName('userid')[0].onblur = (e) => {
+            let id = document.getElementsByName('userid')[0].value;
+            let msg = '';
+            url = 'http://localhost:8000/';
+            fetch(url, {
+                method: 'get',
+            })
+            .then(response => response.json())
+            .then(data => {
+                for(let i = 0; i < data.length; i++) {
+                    if(id == data[i].userid){
+                        // alert('중복되는 아이디가 있습니다');
+                        msg = '이미 가입된 ID입니다';
+                        e.target.value = '';
+                        e.target.focus();
+                        break;
+                    }
+                }
+                document.querySelector('.msg').innerHTML = msg;
+            })
+            // alert('빠져나왔습니다')
+            // e.target.value = '';
+            // e.target.focus();
+        }
+    </script>
+</body>
+</html>
