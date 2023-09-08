@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz1.html</title>
+</head>
+<body>
+    <h1>Quiz1</h1>
+    <hr>
+
+    <ol>
+        <li>어제 ex04.html의 itbank 정보만 radar로 출력</li>
+        <li>그래프 아래 '레이더', '파이', '도넛', '폴라' 버튼을 생성</li>
+        <li>해당 버튼을 누르면 해당 그래프로 변경하여 화면에 다시 출력</li>
+    </ol>
+
+    <div style="width: 600px;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <button>레이더</button>
+    <button>파이</button>
+    <button>도넛</button>
+    <button>폴라</button>
+
+    <select>
+        <option value="radar">레이더</option>
+        <option value="pie">파이</option>
+        <option value="doughnut">도넛</option>
+        <option value="polarArea">폴라</option>
+    </select>
+        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+    <script>
+        let btns = document.querySelectorAll('button');
+        let select = document.querySelector('select');
+        select.onchange = () => {
+            console.log(select.value);
+        };
+
+        const ctx = document.getElementById('myChart');
+
+        let labels = ['근력', '지력', '체력', '지구력', '재능'];
+
+        let data = [30, 40, 50, 60, 20];
+
+        let options = {                                  
+            scale: {
+                r: {
+                    min: 0,
+                    max: 100
+                },
+                ticks: {
+                    stepSize: 20
+                }
+            },
+            plugins: {
+              title: {
+                  display: true,
+                  text: 'Player Parameter'
+              }
+            }
+        };
+
+        let datasets = [                             
+            {
+                label: 'itbank님',
+                data: data,
+                backgroundColor: '#ff000020',
+                borderColor: '#ff0000'
+            },
+        ];
+
+        
+        let chart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: options
+        });
+
+        // btns[0].onclick = () => {
+        //     chart.config._config.type = 'radar';
+        //     chart.update();
+        // };
+
+        // btns[1].onclick = () => {
+        //     chart.config._config.type = 'pie';
+        //     chart.update();
+        // };
+
+        // btns[2].onclick = () => {
+        //     chart.config._config.type = 'doughnut';
+        //     chart.update();
+        // };
+
+        // btns[3].onclick = () => {
+        //     chart.config._config.type = 'polarArea';
+        //     chart.update();
+        // };
+
+        let type = ['radar', 'pie', 'doughnut', 'polarArea'];
+
+        for(let i = 0; i < btns.length; i++){
+            btns[i].onclick = () => {
+                chart.config._config.type = type[i];
+
+                chart.update();
+            }
+        }
+    </script>
+
+    <h4>비슷한 유형끼리 변경</h4>
+    <p>막대 - 선</p>
+    <p>레이더 - 폴라</p>
+    <p>파이 - 도넛</p>
+</body>
+</html>

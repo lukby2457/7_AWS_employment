@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>휴게소 별 현재기온</h1>
+    <hr>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+    <script>
+        let url = 'http://data.ex.co.kr/openapi/restinfo/restWeatherList?key=test&type=json&sdate=20230101&stdHour=10';
+        let labels = new Array();
+        let datas = new Array();
+
+        fetch(url, {
+            method: 'get',
+        })
+        .then(response => response.json())
+        .then(data => {
+            data = data.list;
+
+            for(let i = 0; i < data.length; i++) {
+                let tempValue = Math.round(data[i].tempValue * 10) / 10;
+                let name = data[i].unitName;    // 1. 휴게소 이름을 가져온다
+                let end = name.indexOf('휴');   // 2. '휴'라는 문자가 있는 index를 찾는다
+
+                name = name.substring(0, end);  // 3. 첫글자 ~ '휴' 전까지 자른다
+
+                labels.push(name);
+                datas.push(tempValue);
+            }
+
+            showChart();
+        });
+
+        function showChart(){
+            const ctx = document.getElementById('myChart');
+
+            let options = {                                  
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '2023년 1월 1일'
+                    }
+                }
+            };
+
+            let datasets = [                             
+                {
+                    label: '온도',
+                    data: datas,
+                }, 
+            ];
+            
+            let chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: options
+            });
+        }
+      </script>
+
+</body>
+</html>

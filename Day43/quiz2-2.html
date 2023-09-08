@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>휴게소 별 현재기온</h1>
+    <hr>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+    <script>
+        let url = 'http://data.ex.co.kr/openapi/restinfo/restWeatherList?key=test&type=json&sdate=20230801&stdHour=10';
+
+        let unitName = [];
+        let tempValue = [];
+        
+        fetch(url, {
+            method: 'get',
+        })
+        .then(response => response.json())
+        .then(data => {
+            for(let i = 0; i < 6; i++) {
+                unitName.push(data.list[i].unitName);
+                tempValue.push(Number(data.list[i].tempValue));
+            }
+        });
+
+        console.log(unitName);
+        console.log(tempValue);
+
+        const ctx = document.getElementById('myChart');
+
+        let options = {                                  
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        let datasets = [                             
+            {
+                label: '기온',
+                data: tempValue,
+            }, 
+        ];
+
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: unitName,
+                datasets: datasets,
+            },
+            options: options
+        });
+      </script>
+
+</body>
+</html>

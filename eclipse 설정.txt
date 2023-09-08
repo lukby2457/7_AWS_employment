@@ -1,0 +1,10 @@
+Window -> Preferences
+
+1. General -> Workspace
+-> Text file encoding : utf-8
+
+2. Server -> Runtime Emv
+-> Add -> Tomcat 8.5
+-> directory(server location)
+
+3. Web -> CSS/HTML/JSP

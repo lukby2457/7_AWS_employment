@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>다양한 그래프</h1>
+    <hr>
+
+    <div style="width: 600px;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <button>증가</button>
+    <button>감소</button>
+        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <!-- 데이터 툴팁을 상시 출력하는 추가 라이브러리 -->
+        
+    <script>
+        let btns = document.querySelectorAll('button');
+        let max = 100;
+        let speed = 0;
+        let mod = max - speed;
+        
+        const ctx = document.getElementById('myChart');
+        
+        let labels = ['현재 속도', '남은 속도'];
+        
+        let itbank = [speed, mod];
+
+        let options = {                                  
+            scale: {
+                r: {
+                    min: 0,
+                    max: 100
+                },
+                ticks: {
+                    stepSize: 20
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Player Parameter'
+                },
+            }
+        };
+
+        let datasets = [                             
+            {
+                label: 'itbank님',      
+                data: itbank,                
+                backgroundColor: ['#00ff00A0', '#00000020'], 
+                rotation: -90, 
+                circumference: 180,
+                datalabels: {
+                    color: '#0000ff',
+                    font: {
+                        size: '20px',
+                        weight: 'bolder',
+                        style: 'italic'
+                    },
+                }
+            },
+        ];
+        
+        // for(let i = 1; i <= 6; i++){
+        //     labels.push(i);     // 배열 추가 함수
+        // }
+        
+        let chart = new Chart(ctx, {                            
+            type: 'pie',                
+            data: {                             
+                labels: labels,                    
+                datasets: datasets               
+            },
+            plugins: [ChartDataLabels], // 1. 플러그인 추가
+            options: options, 
+        });
+        
+
+        btns[0].onclick = () => {
+            speed += (speed >= 100) ? 0 : 1;
+
+            itbank = [speed, max - speed]
+
+            chart.data.datasets[0].data = itbank;
+
+            console.log(chart);
+            chart.update();
+        };
+
+        btns[1].onclick = () => {
+            speed -= (speed <= 0) ? 0 : 1;
+            itbank = [speed, max - speed]
+
+            chart.data.datasets[0].data = itbank;
+
+            //console.log(chart.data);
+            chart.update();
+        }
+    </script>
+</body>
+</html>
