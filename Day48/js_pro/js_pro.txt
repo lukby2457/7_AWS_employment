@@ -1,0 +1,20 @@
+- insertPro.jsp body 기준 -
+<body>
+	<% request.setCharacterEncoding("utf-8"); %>
+
+	<jsp:useBean id="newPer" class="beans.PersonVO"/>
+	<jsp:setProperty property="*" name="newPer"/>
+
+	<%
+		String birth = request.getParameter("birth");
+		newPer.setBirth(birth);
+		
+		PersonDAO dao = new PersonDAO();
+		int row = dao.insert(newPer);
+	%>
+
+	<script>
+		message(<%=row %>);
+	</script>
+
+</body>
