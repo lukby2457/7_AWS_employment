@@ -1,0 +1,69 @@
+0. selectAll에 page값을 가져오고
+sql을 슬라이싱.sql의 sql문을 사용하고
+pstmt로 변경 후 getter로 값을 넣어준다
+
+reqPage			사용자가 요청한 페이지
+offset			가져올 페이지 시작점
+perBoard		한 페이지에 출력할 게시글 수 (= 10)
+
+totalBoard		총 게시글 수 (= 1536)
+totalPage		총 페이지 수 (= ?)
+
+perPage			한 화면에 출력할 페이지 번호 수 (= 10)
+section			페이지 범위를 구분할 index 번호
+begin			section의 첫 페이지 번호
+end			section의 마지막 페이지 번호
+
+1. reqPage에 대한 offset구하기
+- 사용자가 요청한 페이지에 따라서 가져올 시작점을 지정
+reqPage		offset
+----------------------
+1		0		
+2		10
+3		20
+4		30
+...
+n		(n - 1) * boardCount
+
+즉, offset = (reqPage - 1) * boardCount
+
+2. totalPage 계산하기
+totalPage = totalBoard / perBoard
+	  = 153 ... 6
+
+나머지를 띄울 페이지가 필요
+즉, 추가로 1페이지를 더 만들어 줄 필요가 있다
+totalPage += (totalBoard % perBoard == 0) ? 0 : 1
+
+3. 페이지 범위 나누기
+3-1. 요청 페이지에 대한 section을 구한다
+3-2. begin과 end를 구한다
+reqPage		section		begin		end	totalPage
+-----------------------------------------------------------------	
+1 ~ 10		0		1		10	154
+11 ~ 20		1		11		20	154
+21 ~ 30		2		21		30	154
+31 ~ 40		3		31		40	154
+...
+141 ~ 150	14		141		150	154
+151 ~ 160	15		151		160	154
+
+section = (reqPage - 1) / perPage	-> 10일때 1이 나오기 때문에 -1 한다
+begin =  section * perPage + 1
+end = (section + 1) * perPage
+
+※ 마지막 section의 end는 totalPage보다 클 수 있으므로
+end = (end > totalPage) ? totalPage : end;
+
+4. 이전 버튼, 다음 버튼 구현
+- 0번 section이면 제일 처음 section이라 이전은 필요없다
+prev = section != 0
+
+- 마지막 section이면 더 이상 다음은 없다
+※ 마지막 section인 경우 end와 totalPage의 값이 같다
+next = end == totalPage
+
+5. java 객체로 만들때
+map에 저장할 때 따로 호출이 아니라 생성자 p를 map에 저장한다
+getter를 만들면 isPrev를 get으로 바꿔야지 EL에서 호출이 가능하다
+
