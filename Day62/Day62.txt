@@ -1,0 +1,15 @@
+실제 작업 위치
+D:\workspace-JSP\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Day62\uploadEx
+
+workspace 위치
+D:\workspace-JSP\Day62\WebContent\uploadEx
+
+-----------------------------------------------------------------------------------------------
+파일 업로드 후 upload.renameTo(이름) => 파일 이름 변경. 단 확장명이 없다
+확장명을 기존 파일 이름에 .기준 뒤까지 잘라서 확장명을 가져와서 이름뒤에 붙이고 업로드하면 이름.확장명이 된다
+
+input에 accept를 지정하면 파일에서 같은 타입만 보여주게 된다(image 전체를 지정하고 싶으면 image/*)
+특정 타입의 파일만 받고 싶으면 javascript로 먼저 처리하고 파일을 업로드하게 만들어주어야 한다
+(절대경로 설정 등은 spring에서)
+
+이름에 아무것도 입력 안 했을시 원래 파일명으로 업로드 되게 처리

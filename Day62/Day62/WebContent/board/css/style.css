@@ -1,0 +1,17 @@
+@charset "UTF-8";
+body {
+	width: 1200px;
+	margin: 0 auto;
+}
+.board {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.thumbnail {
+	width: 17%;
+	height: 200px;
+	/* border: 1px solid black; */
+	margin: 10px;
+	text-align: center;
+}
