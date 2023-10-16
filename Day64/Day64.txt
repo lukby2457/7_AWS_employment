@@ -1,0 +1,13 @@
+@WebServlet("/home")
+
+ServletMapping
+
+클라이언트 접근X -> web-inf에 jsp 생성 -> forward로 접근 가능
+
+URL -> 자원의 실제 위치
+URI -> 자원 식별자
+
+request를 servlet에서 처리후 jsp에 포워드
+
+css, js는 WebContent에 만든다
+불러올 때 ServletMapping에 /를 만들지 않게 주의한다
