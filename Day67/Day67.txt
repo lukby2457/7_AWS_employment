@@ -1,0 +1,97 @@
+help의 marketplace 클릭
+sts 검색 후 이파리 모양의 spring 설치
+
+google에 sts3 검색
+spring 홈페이지에서 3.9.14의 4.15 설치(marketplace가 제대로 안 돌아감)
+
+Spring MVC Project로 선택
+topLevelPackage (com.naver.www)
+
+legacy는 maven
+boot는 gradle
+
+<java-version>1.6</java-version>
+<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+변경 권장
+
+topLevelPackage (com.itbank.Day67)
+<groupId>com.itbank</groupId>
+<artifactId>Day67</artifactId>
+
+jar war
+
+EL태그 같이 생긴 것은 properties의 같은 이름의 값을 불러온다 (변수)
+
+compile + link = build
+
+java-version
+springframework-version
+변경
+
+1.8 변경 -> bulid/plugins/plugin의 maven.plugins의 configuration의 source, target -> alt + f5로 변경
+web.xml의 web-app version을 3.1로 변경, 3_1로 변경
+
+src는 실제 위치
+보통 위의 아이콘들을 자주 사용
+
+서버 실행시 에러 (한글 경로 지원 x)
+<!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
+<!-- XML 경로 파싱을 지원 (= 한글 경로도 가능) -->
+
+
+@RequestMapping(value = "/", method = RequestMethod.GET)
+= WebServlet("/")
+
+return "home" -> home.jsp로 forward
+
+Beans가 안 열린다
+Spring을 Remove 후 Add 한다
+
+@
+- 주석
+- 특정 기능
+
+@requestMapping
+value()
+method()
+
+
+Spring 3
+@RequestMapping(value = "/", method = RequestMethod.GET)
+
+Spring 4 이후
+@GetMapping("/")
+
+"/" get 요청 -> homeController가 반응 -> requestmapping의 value, method 판별 -> return 실행
+return "home" -> /WEB-INF/home.jsp로 forward
+
+property : 속성
+class Person {
+	String name; -> 속성
+}
+
+return "home" -> prefix(/WEB-INF/views/) home suffix(.jsp)로 forward
+
+@Controller는 servlet-context의 component-scan로 @Controller의 @Component를 찾아서 작동한다
+base-package의 이름으로 scan한다 -> package 이름이 다르면 scan하지 않는다
+
+appServlet -> DispatcherServlet 설정 -> /WEB-INF/spring/appServlet/servlet-context.xml
+mapping은 / 받는다
+
+요청 -> servlet
+DB나 Service(요청과 관련 없는 것) -> root
+
+control을 만들지 않았을때
+메시지가 없다
+
+control을 만들었을때
+[/WEB-INF/views/ex01.jsp]
+작동은 하는데 forward할 jsp가 없다
+
+단순히 attribute를 저장할 때는 model을 사용한다
+
+s : spring bean. Spring이 알고 있는 객체
+등록
+	- @Controller 추가
+	- import 하기
+-> Spring의 Controller에 추가되어 있는지 확인
