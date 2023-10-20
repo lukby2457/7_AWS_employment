@@ -1,0 +1,74 @@
+1. project 만들고 home 띄우기
+	project 기본 설정
+
+2. Ex01Controller를 작성
+	- GET : 입력 form 출력 (name, age을 전송)
+	- POST : age가 19 이상이면 성인, 아니면 미성년자를 출력
+
+개념
+map으로 받을려면 @RequestParam을 적어야 한다
+안 적으면 parameter를 받지 않는다
+
+VO : 내 서버 내에서 아는 것을 접근할 때 자주 사용
+Map : 내가 parameter를 모르는 것을 접근할 때 자주 사용. 보통 디버깅용으로 사용
+
+
+1. Controller 유형
+	void : 요청한 URL이 viewName이 된다
+	String : 반환한 문자열이 viewName이 된다
+	ModelAndView : ModelAndView에 지정된 viewName을 사용한다 (Model + String)
+
+2. Controller 매개변수
+	request : JSP에서 사용하던 request
+	Model : request 대신에 Attribute를 제공
+	Parameter와 동일한 이름의 매개변수 : 동일한 이름에 저장된다
+	VO 객체 : 동일한 이름의 필드에 저장된다
+	Map : 모든 파라미터를 받을 수 있다. 단, @RequestParam 어노테이션 필요
+
+
+Service
+Controller 파생
+
+Singleton - 동일한 기능이면 여러 개를 만들지 않고 한개를 만들어서 재사용한다
+
+singleton에 new를 만들면 요청한 만큼의 개수를 만든다
+
+servlet-context는 요청과 관련된 객체를 처리 하는것
+개인은 root-context : 공유할 자원(요청과 관련 없는 것)
+
+Namespaces에서 Context를 체크하면 자동완성을 지원한다
+
+<context:component-scan base-package="com.itbank.service"/>를 등록하면 Spring에 등록된다
+
+@Autowired
+의존성(필수로 필요한 것) 주입 -> 기능을 넣어주게 된다
+아래 타입과 동일한이름이 Spring Beans를 찾아서 인스턴스를 생성해줌
+이를 의존성 주입(DI)라고 한다
+없으면 에러 발생
+
+
+3. Quiz1Controller 작성
+	- get : 정수 하나 입력 form
+	- post : 입력 받은 정수의 수만큼 로또 번호를 생성해서 출력
+	- Logic 처리는 Quiz1Service에서 진행
+
+
+DB 연결
+maven repository
+ojdbc8
+Spring jdbc (<version>에 ${org.springframework-version}를 붙여넣는다)
+C3P0 : JDBC Connection pooling
+
+control -> service 호출 -> DAO호출
+
+Spring에서 Connection 지원
+ds = combopooleddatasource = 리모컨의 건전지
+jt = 리모컨(참조 = ref)
+
+ex04 -> controller -> get -> service -> test -> dao -> banner -> String -> return String
+-> attribute -> ${}
+
+단일행 : queryForObject(sql, return type class)
+다수행 : query(sql, rowMapper)
+
+rowMapper는 interface => 람다식으로 null인 rowMapper를 만든다
