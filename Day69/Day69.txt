@@ -1,0 +1,35 @@
+1. Day69 스프링 프로젝트 생성
+2. Day69/로 요청시 Account 테이블을 가져와 출력
+- 단, idx로 내림차순
+
+1.8 => lambda식 사용을 위해
+
+package명 => app 별 구분용
+
+여러개를 담아야 한다 -> singleton으로 하면 마지막 객체만 들고오게 된다
+singleton으로 등록하지 않고 사용자별 구분을 하려면 beans로 등록하지 않는다
+
+주소창에 /resources/를 요청하면 webapp/resources/를 호출한다
+
+<link rel="stylesheet" href="${cpath }/resources/css/style.css">
+-> http://localhost:8080/Day69/resources/css/style.css
+
+queryForObject(sql, rowmapper, args) => preparedStatement
+rowMapper에 클래스가 명시되어 있어서 따로 명시하지 않는다
+
+update(sql, args) => insert, delete, update 요청
+
+1. book 테이블 생성
+idx 		: 책번호 (pk)
+title 		: 책제목	
+writer 		: 저자
+publisher 	: 출판사
+p_date		: 출판일
+price 		: 가격
+
+2. 모든 요청은 Day69/book 아래에서 처리한다
+- /book/list 	: 모든 책 목록을 출력
+- /book/view 	: 지정한 책 하나의 정보를 출력
+- /book/add 	: 책 정보를 입력 받아서 테이블에 추가
+- /book/update 	: 지정한 책 정보를 변경
+- /book/delete 	: 지정한 책 정보를 테이블에서 제거
