@@ -1,0 +1,55 @@
+@charset "UTF-8";
+body {
+	width: 1000px;
+	margin: 0 auto;	
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+.menu {
+	display: flex;
+	padding: 0;
+	list-style: none;
+}
+.menu > li {
+	margin: 0 10px;
+}
+.board {
+	width: 100%;
+	border-collapse: collapse;
+}
+.board th, .board td {
+	border: 1px solid #aaaaaa;
+	padding: 5px 10px;
+}
+.board td:nth-child(2) {
+	width: 50%;
+}
+.view {
+	width: 100%;
+	border-collapse: collapse;
+}
+.view th, .view td {
+	border: 1px solid #aaaaaa;
+	padding: 5px 10px;
+}
+.add {
+	width: 100%;
+	border-collapse: collapse;
+}
+.add th, .add td {
+	border: 1px solid #aaaaaa;
+	padding: 5px 10px;
+}
+.add input, .add textarea {
+	box-sizing: border-box;
+	border: 0;
+	outline: none;
+	width: 100%;
+	font-size: 16px; 
+}
+.add textarea {
+	resize: none;
+	min-height: 350px;
+}
