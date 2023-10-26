@@ -1,0 +1,17 @@
+home(page)
+
+▽
+homecontroller(page)
+
+▽
+boardservice(page)
+paging(page, dao.totalBoard())
+selectAll(page.offset, page.perBoard)
+map.put(paging, paging)
+map.put(list, selectAll)
+return map
+
+▽
+DAO
+totalBoard()
+selectAll(paging)
