@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itbank.model.BoardDAO">
+
+	<select id="test" resultType="String">
+		select to_char(sysdate, 'yyyy-mm-dd') as time from dual
+	</select>
+
+	<select id="selectAll" 
+		resultType="com.itbank.beans.BoardVO"
+		parameterType="com.itbank.components.Paging">
+		select * from board 
+			order by idx desc 
+			offset #{offset} rows 
+			fetch next #{perBoard} rows only
+	</select>
+	
+	<select id="selectOne" 
+		resultType="com.itbank.beans.BoardVO"
+		parameterType="int">
+		select * from board where idx = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="String">
+		insert into 
+			board(title, writer, contents) 
+			values(#{title}, #{writer}, #{contents})
+	</insert>
+	
+	<update id="update" 
+		parameterType="com.itbank.beans.BoardVO">
+		update board set 
+			title = #{title}, contents = #{contents}, writer = #{writer}
+			where idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete board where idx = #{idx}
+	</delete>
+		
+	<update id="updateView" parameterType="int">
+		update board set
+			view_count = #{view_count} where idx = #{idx}
+	</update>
+	
+	<select id="getTotalBoard" 
+		resultType="int">
+		select count(*) as count from board
+	</select>
+	
+</mapper>
