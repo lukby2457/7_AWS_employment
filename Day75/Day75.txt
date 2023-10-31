@@ -1,0 +1,30 @@
+spring test 사용 = 4.12이상 (SpringJUnit4ClassRunner 때문)
+
+mybatis는 의존성 주입이 필수 (DAO가 interface이기 때문)
+
+@RunWith(SpringJUnit4ClassRunner.class)를 붙여도 에러 발생
+- ApplicationContext 에러
+- servlet-context, root-context 등록을 안 해서
+
+src에서 root-context를 찾아서 show in -> system explorer로
+src\\...\\root-context.xml이 경로
+ContextConfiguration(locations = {"file:경로"})추가
+
+spring이 실행되면서 ls에 의존성 주입한다
+
+hikaricp
+
+@ignore
+
+before와 after는 test마다 실행
+	setNum() -> run1() -> result()
+	setNum() -> run2() -> result()
+	setNum() -> run3() -> result()
+
+beforeclass는 공통으로 사용하는 것 -> static으로 제작해야함
+	setShare() -> run1() -> run2() -> run3() -> resultShare()
+
+VO를 만들고 notequals를 하면 다르다고 인식됨
+equals를 만들지 않아서 비교 불가라 다른 책으로 인식
+equals를 만들면 같은 책으로 인식
+
