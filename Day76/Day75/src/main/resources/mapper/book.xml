@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itbank.model.BookDAO">
+
+	<select id="selectAll"
+		resultType="com.itbank.model.vo.BookVO"
+		parameterType="map">
+		select * from book
+			<if test="type != null">
+			where ${type} like '%${search}%'
+			</if>
+			order by idx desc
+	</select>
+	
+	<insert id="insert"
+		parameterType="com.itbank.model.vo.BookVO">
+		insert into book 
+			values(#{idx}, #{title}, #{writer}, #{publisher}, #{p_date}, #{price})
+	</insert>
+	
+	<update id="update"
+		parameterType="com.itbank.model.vo.BookVO">
+		update book set
+			title = #{title}, writer = #{writer},
+			publisher = #{publisher}, p_date = #{p_date},
+			price = #{price}
+		where idx = #{idx}
+	</update>
+	
+	<!-- 
+		#{이름} : mybatis가 자료형을 알아서 결정해서 데이터를 기입
+		${이름} : 전달한 데이터 그대로 데이터를 기입
+		
+		동적 SQL : 조건 유무에 따라 실행시 SQL구문이 변화하는 구문
+					EL이 아니라 문자 그대로 작성해야함
+		if : 조건을 지정해서 SQL 실행 여부를 결정
+		foreach : 반복적으로 지정 SQL 구문을 수행
+	-->
+</mapper>
