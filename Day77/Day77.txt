@@ -1,0 +1,33 @@
+Controller에서 msg, row를 service로 이전
+
+service로 이전 시 Test도 수정해야 함
+수정 사항
+service를 dao로 호출하도록 변경
+
+form 안에 button 작동
+<form>
+	<a>
+		<button>
+	</a>
+</form>
+button의 기본이 submit이라 form 안에 required가 있으면 required 에러 발생 후 a 작동x
+
+button의 type을 button으로 바꾸면 a 실행
+
+commons-lang3
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+
+
+ => randomAlphanumeric(자리 개수)
+@Test
+	public void testRandomString() {
+		for (int i = 1; i <= 10; i++) {
+			String ranStr = RandomStringUtils.randomAlphanumeric(10);
+			System.err.println(ranStr);
+		}
+	}
