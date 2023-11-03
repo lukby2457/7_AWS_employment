@@ -1,0 +1,25 @@
+DAO는 오버로딩이 되지 않는다
+
+getter, setter -> Lombok
+
+lombok 다운 후 cmd
+java -jar lombok.jar
+
+eclipse 경로를 찾아서 설치
+
+lombok 적용 test
+sts 3.9.14의 4.15버전 설치
+
+
+boot project 제작
+maven java 8
+spring 2.7.18 RELEASE 선택
+
+spring boot devtool
+spring web
+
+service, controller, model은 application 밑에 제작
+
+sts 설치하기 싫으면 spring initializr에서 boot 제작 후 import
+
+AOP
