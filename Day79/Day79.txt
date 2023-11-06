@@ -1,0 +1,36 @@
+spring-aop를 aspectjrt 근처에 두고
+aspectjtools를 설치
+
+AOP.java
+@components -> spring bean 등록
+@aspect -> aspect 자동 등록
+
+ 
+(*		com.itbank.service	.*	.*	(..)
+메서드 반환 타입	패키지명			클래스	메서드	매개 변수
+
+메서드와 매개변수 사이 . 찍지 않게 유의
+
+79일 testAop = dao수행후 시간 계산
+
+처음 시작할 땐 시간 계산
+묶을 수 없는건 과감히 배제
+
+aop의 매개변수 : (), joinpoint
+
+login, signup, change => aop
+findPw => 위의 pw hash와 약간 달라서 따로 처리
+
+요청 처리 -> interceptor (servlet에서 확인)
+
+filter -> spring x (encoding)
+interceptor -> request, response 처리
+aop -> 중복 처리
+
+* : 아래 경로
+** : 아래 하위 경로
+
+게시글 리스트는 보는데 게시글 내용은 못 본다
+- board/list/*
+
+인증(실제 유저가 요청한 것이 맞는가)
