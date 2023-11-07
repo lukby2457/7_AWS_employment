@@ -1,0 +1,29 @@
+transaction
+ACID(원자성, 일관성, 고립성, 지속성)
+원자성 : 전부 성공, 전부 실패
+정합성 : 형태 유지
+독립성 : 연산에 끼어들지 못 하도록 보장
+지속성 : 값이 계속 유지
+
+for == 4
+
+배포 시 value=warn을 debug로 변경 권장
+
+AWS 서버 사용시 pool 개수에 따라 사용량 증가
+-> maximumPoolSize 개수 조정
+
+insert 등 행의 변화가 생김 -> transaction 발생
+여러 행을 추가 후 commit 안 함 -> 여러 행 변화가 하나의 transaction
+commit, rollback을 만남 -> transaction 종료
+
+spring에서 transaction
+@transactional
+전체를 transaction로 보게 된다
+
+service마다 transactional을 주면 일관성 유지
+한번에 주고 싶으면 @service 밑에 @transactional을 주면 된다
+
+paging, 댓글 구현
+
+게시글 작성 후 보통 게시글 목록으로 리다이렉트
+-> 글 작성 후 작성된 글로 리다이렉트
