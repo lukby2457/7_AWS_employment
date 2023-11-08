@@ -1,0 +1,37 @@
+1. AOP를 활용해서 로그인/회원가입시 해시 처리를 사용
+before -> around
+
+2. 글작성시 현재 로그인 중인 계정이 작성자로 지정
+
+3. Interceptor를 활용해서 글 작성시 로그인이 안 되어 있으면 로그인으로 리다이렉트
+
+본래 flush가 적용됨
+
+select는 flush가 적용되면 성능 저하. readOnly는 flush를 하지 않게 된다
+
+logging
+slf4j -> 중간 다리 / 호환성 (Binding)
+
+log4j -> 로그를 남기는 프레임워크
+boot -> Logback
+
+log4j.xml
+
+appender : 로그를 남기는 위치
+target : 출력
+
+개발 : debug, trace
+배포 : info
+
+info : info 이상 로그만 출력 (debug, trace는 출력 x)
+
+root-logger
+전체 다 적용 (위에서 지정되지 않은 라이브러리 등 로그들)
+
+private Logger log = LoggerFactory.getLogger(getClass());
+
+기본 : info
+상세 : debug
+보기 싫다 : warn
+
+%-5p(간격) %c(클래스명) - %m%n(메세지)
