@@ -1,0 +1,29 @@
+service에서 log를 쓰고 싶다
+
+aop를 활용
+
+file 입출력
+enctype="multipart-form/data"
+commons-io 설치
+apache common fileupload 설치
+
+multipartrequest, multipartfile
+
+servlet-context에 multipartresolver bean 등록
+이름을 마음대로 설정하면 안 됨
+maxuploadsize에 연산자 사용 불가 => 직접 계산해서 byte로 입력
+defaultencoding은 무조건 설정
+
+@Value 외부에 있는 설정을 spring에 주입 (파일을 가져올 수도 있다)
+
+classpath:upload => src/main/java or src/main/resuorces에서 탐색
+file:/ => 같은 드라이버 위치
+file:C: => 다른 드라이버 위치
+
+전송한 이름으로 업로드
+없으면 원본 파일 이름으로 업로드
+
+DB에 이미지 저장 가능 (BLOB)
+로딩시간이 늘어남에 따라 권장하지 않음
+DB에는 파일 경로만 저장
+실제 파일은 파일 서버에서 관리
