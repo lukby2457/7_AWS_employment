@@ -1,0 +1,25 @@
+서버에 파일을 추가 해도 DB에는 안 들어간다
+손으로 직접 쓰거나 sql script를 만들어야 한다
+
+file을 삭제시 db에서도 삭제
+file 이름 변경시 db도 이름 변경
+
+다음주
+img_board
+/ -> home.jsp
+- img_board 테이블 출력
+
+board/write -> board/write.jsp
+GET -> 입력 폼 출력
+POST -> redirect:/ insert
+
+board/view/{idx}
+GET -> board/view.jsp 게시글 출력
+
+board/delete/{idx}
+GET -> redirect:/ 게시글 삭제
+
+board/update/{idx}
+GET -> board/update.jsp 입력 폼 출력
+POST -> redirect:/ update
+

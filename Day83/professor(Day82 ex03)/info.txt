@@ -1,0 +1,31 @@
+ex03_update
+파일 이름 변경 입력 form
+uploader, memo, name 변경
+enctype 제거 (실제 파일이 올라가지 않으므로)
+
+Controller
+	ex03Delete
+	파일 경로의 실제 파일과 DB의 정보 삭제
+	
+	ex03Update(GET)
+	idx에 저장된 파일 정보를 ex03_update로 전달
+
+	ex03Update(POST)
+	ex03_update에 입력된 정보를 실제 파일과 DB의 정보 수정
+
+Service
+	delFile(FileVO input)
+	파일 경로의 실제 파일과 DB의 정보 삭제
+
+	getFile(int idx)
+	DB에서 idx에 저장된 파일 정보 불러오기
+
+	updateFile(FileVO input)
+	원본 파일 이름을 가져오기 위해 selectOne 호출, VO에 저장, file 객체 src 생성
+	input에 저장되어 있는 파일이름으로 file 객체 dst 생성
+	src를 dst로 이름 변경 및 DB 정보 변경
+
+DAO	
+	@Update
+	update(FileVO input)
+	sql 차이점 파악	
