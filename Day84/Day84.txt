@@ -1,0 +1,52 @@
+Day83
+img_board
+/ -> home.jsp
+- img_board 테이블 출력
+
+board/write 
+GET -> board/write.jsp 입력 폼 출력
+POST -> redirect:/ insert
+
+board/view/{idx}
+GET -> board/view.jsp 게시글 출력
+
+board/delete/{idx}
+GET -> redirect:/ 게시글 삭제
+
+board/update/{idx}
+GET -> board/update.jsp 입력 폼 출력
+POST -> redirect:/ update
+
+update
+	input type="file"은 value 설정 불가
+	vo에 기존 img는 존재
+	새 이미지는 imgFile에 정보가 저장 된다
+
+	testcase
+	     이전     	    다음
+	1. no img 	-> no img
+	2. no img 	-> img
+	3. img 		-> no img
+	4. img 		-> img
+
+	이전 이미지 존재 = prevFile.exists()
+	수정 이미지 존재 = !imgFile.isEmpty()
+
+css gradation
+background: linear-gradient(to right, red, blue)
+오른쪽으로 red -> blue
+45도 = 45deg
+
+textarea에 img를 넣으면 javascript로 img를 찾아서 전송시키면 된다
+
+upload할때 idx로 폴더 생성 후 그 안에 이미지 저장
+이미지를 호출할 땐 idx/image로 호출
+
+Day84
+RESTful
+Postman을 다운로드 해야 localhost로 접속이 가능하다
+웹에서는 localhost 접근 불가
+
+4버전 이후 : @RestController
+
+json convert - jackson databind
