@@ -1,0 +1,46 @@
+POJO
+데이터를 주고받기 위한 형태
+
+DB에 초까지 저장하고 싶다
+-> timestamp로 지정하고 VO에선 Date로 받으면 된다
+
+Controller -> void, String, ModelAndView -> attribute()
+RestController -> 다양한 타입의 반환형
+
+put, patch
+전체를 변경 -> put 
+	모든 열 정보를 다 받는 것이 바람직
+	특정 책번호의 price만 바꾸려고 put을 쓰면
+	나머지 데이터가 null이 채워지거나 에러 발생
+	즉, 모든 데이터 변경시 put을 사용하는 것이 바람직
+
+일부를 변경 -> patch
+	지정 부분만 변경하기 때문에 다른 속성은 영향을 받지 않음
+	즉, 부분적으로 변경시 patch를 사용하는 것이 바람직
+
+REST
+GET	/book	GET	/book?idx=1
+POST	/book
+PUT	/book
+PATCH	/book
+DELETE	/book
+
+eclipse에서 수정 가능
+단, 동시 수정 하면 충돌 발생
+
+postman은 ?뒤의 parameter로 처리
+Web은 body의 문서로 처리
+
+response.json으로 하면 int가 안 받아지는 경우 발생
+response.text로 받으면 된다
+
+patch는 대문자로
+
+{
+    "title": "POSTMAN",
+    "writer": "test user",
+    "publisher": "naver",
+    "p_date": "2023-11-15",
+    "price": 50000,
+    "idx": 7777
+}
