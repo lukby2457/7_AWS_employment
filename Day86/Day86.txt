@@ -1,0 +1,18 @@
+{
+    "title": "POSTMAN",
+    "contents": "",
+    "writer": ""
+}
+
+restcontroller : 전체 다 rest로 쓰고 싶다
+controller + responsebody : 부분적으로 rest를 쓰고 싶다(권장하진 않음)
+
+(required = false)
+data를 전달하지 않으면 input은 null이다
+
+이때, if문으로 null이면 new로 만들면 input은 존재하게 되지만 안의 data 값들이 기본값으로 세팅된다
+
+delete에 input을 전달하는 것보다 int 하나만 보내는 것이 최적화에 좋다
+
+table을 찾아서
+table.onclick = (event) => {alert(event.target.innerHTML);}
