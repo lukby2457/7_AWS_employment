@@ -1,0 +1,131 @@
+Paging
+
+reqPage			요청 페이지
+totalBoard		전체 게시글 수
+
+perCount = 10		화면당 게시글 수
+offset			게시글 시작점
+
+totalPage		전체 페이지 수
+perPage = 10		화면당 페이지 수
+section			페이지 영역
+begin			영역 첫 번호
+end			영역 끝 번호
+
+reqPage		offset
+1		0
+2		10
+3		20
+...
+n		(n-1)*perCount
+
+offset = (reqPage - 1) * perCount;
+
+
+totalPage = totalBoard / perCount;
+totalPage += (totalBoard % perCount == 0) ? 0 : 1;
+
+
+reqPage		section		begin		end
+1 ~ 10		0		1		10
+11 ~ 20		1		11		20
+21 ~ 30		2		21		30
+...
+141 ~ 150	14		141		150
+151 ~ 160	15		151		160 -> 156
+
+section = (reqPage - 1) / perPage;
+begin = section * perPage + 1;
+end = (section + 1) * perPage;
+end = (end < totalPage) ? end : totalPage;
+
+----------------------------------------------------------------------
+VUE
+JQuery
+React
+
+-----------------------------------------------------------------------
+Git
+문서관리
+버전 관리 = 파일의 변경사항을 추적
+
+TUI : Text User Interface
+CLI : Command Line Interface
+
+시각화
+	git desktop
+	source tree (github 연동 힘듬)
+	git kraken(유료)
+	vscode - git lens, git graph
+
+
+설치
+explorer -> 우클릭
+아이콘 생성 말고는 next
+start menu, next
+next
+initial branch -> 제일 처음 이름, next
+PATH(환경 변수) -> next
+SSH -> next 
+HTTPS transport (http 연결) -> next
+ending conversion (엔터 변환)
+	CRLF : Windows 엔터
+	LF : Linux 엔터
+git bash -> 위의 것 추천, next
+git pull -> next
+helper -> next
+extra -> systemcaching
+
+GUI 권장x
+원하는 폴더를 git bash로 연다
+
+clear: cmd창 비움
+
+git저장소는 .git으로 관리한다(날라가면 저장소 설정 날라감)
+
+git init => .git 파일 생성
+(master) : branch 위치
+
+git status : 저장소 상태
+
+On branch master (협업때는 사용x)
+
+No commits yet	(버전 생성x)
+
+Untracked files:	(한번도 git에서 관리되지 않은 파일)
+  (use "git add <file>..." to include in what will be committed)
+        1.git outline.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+1. 저장소 생성
+- git에서 버전 관리된 파일이 보관되는 위치
+- 명령) git init
+- 결과) 현재 폴더에 .git이라는 폴더가 생성 (= git이 관리하는 폴더)
+
+2. 사용자 설정
+- 사용자 : git config --global user.name <이름>
+- 이메일 :  git config --global user.email <이메일>
+- 확인 : $ git config --global --list
+
+※ 버전 생성 시 어떤 사람이 생성했는지 추적이 필요
+	- 사용자 등록은 필수
+
+3. 버전 생성 (= commit)
+1) 현재 저장소가 있는 폴더에 파일을 생성 및 수정을 발생 시킨다
+2) git status 명령을 입력
+3) 'Untracked files' 라는 파일은 아직 git에 의해 관리가 한번도 되지 않은 파일을 의미
+4) 버전을 생성하기 위해선 일단 해당 파일을 Stage라는 영역에 등록해야 한다
+5) 이때, git add <파일명> 명령을 치면 Stage에 등록된다
+6) 되돌리고 싶으면 git rm --cached <파일명> 명령을 치면 work tree로 돌아간다
+7) 버전 생성은 git commit -m <메세지> 명령을 치면 commit이 된다
+
+저장소 종류
+1. work tree : 작업지
+2. stage : git에 의해 관리 받는 파일 위치
+3. repository : 버전 관리 위치, 버전 생성 (commit)
+
+vscode
+Git Graph
+	소스 제어에 view git graph 보기
+	
