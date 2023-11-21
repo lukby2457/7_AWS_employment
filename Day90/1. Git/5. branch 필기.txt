@@ -1,0 +1,12 @@
+branch 명령어 (같은 줄 다른 내용 == 충돌)
+1. git branch : 현재 저장소(git)의 브랜치 목록 확인
+2. git branch <이름> : 새 브랜치를 생성
+3. git branch <이름> <커밋해시> : 지정 커밋에 브랜치를 생성
+4. git branch -d <이름> : 지정 브랜치 제거
+5. git checkout <이름> : 지정 브랜치로 이동
+
+merge 순서
+1. 먼저 합쳐서 적용하려고 하는 브랜치로 이동한다
+2. git merge <브랜치명> 을 입력
+3. merge를 실행시 vi라는 에디터가 열린다
+4. :wq를 작성하면 저정 후 종료가 되고 현재 브랜치에 merge가 된 commit이 생성됨

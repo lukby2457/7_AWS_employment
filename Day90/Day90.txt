@@ -1,0 +1,35 @@
+1. 현재 위치에서 DB connection이라는 브랜치를 생성한다
+
+2. DAO를 구성해서 (JDBC만 사용) 접근을 하는 코드를 작성한다
+- 처음엔 VO 없이 DB 버전 정보만 출력하는 테스트 코드를 작성
+- 그 후 제대로 동작하면 'test 완료' 메세지로 커밋을 생성
+
+3. VO를 구성해서 Account 테이블을 화면에 출력
+- 완료 후 'Account 완료' 메세지로 커밋을 생성
+- 그 후 master에 merge해서 최종적으로 합친다
+
+Branches에 switch to -> New Branch로 브랜치 생성 가능
+
+branch에서 master 병합시 new commit 체크 해제하면
+| |
+|\|
+|/|
+| |
+가 아닌
+| |
+ \|
+ /|
+| |
+로 표시된다 
+
+git log --remotes --oneline
+
+- Test git 파일 확인 -
+
+public 이어도 마음대로 볼 수 있다 정도이고
+파일을 변경할 수는 없다
+
+주인 계정으로 setting -> Collaborators
+등록할 계정으로 invite로 초대를 보냄
+
+
