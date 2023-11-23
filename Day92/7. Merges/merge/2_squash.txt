@@ -1,0 +1,2 @@
+https://hudi.blog/git-merge-squash-rebase/
+- 이 사이트 그림 참조

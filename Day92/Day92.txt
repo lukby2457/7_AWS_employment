@@ -1,0 +1,55 @@
+master 말고 모든 branch까지 들고 올 거면
+체크 해제
+
+내가 올릴 때 Contribute
+원격 저장소랑 맞출땐 Sync fork
+
+fork한 저장소에 파일을 올려도 원본 저장소는 변경되지 않는다
+원본 저장소도 변경하고 싶으면 원본 저장소에 requests를 보낸다
+
+base repository base:master		=> 원본 저장소의 master 브랜치
+head repository compare:master		=> fork한 자신의 저장소의 master 브랜치
+
+merge 하면 branch 내역까지 다 들어가게 된다
+
+merge하는데 내가 commit 메세지를 쓰고 싶으면 No Commit 체크
+
+merge 방식
+1. merge
+시간에 맞춰서 합쳐진다
+합치려는 branch에 내역이 많아지면 master 내역도 많아진다 
+
+2. squash
+branch의 내용을 하나로 합쳐서 merge한다
+master에 작업한 파일 내용은 유지하고 커밋 해시는 하나만 유지
+
+3. rebase
+merge랑 순서 반대로 rebase 클릭
+master 순서 앞에 시간 순서 상관 없이 앞에 커밋 해시를 전체 추가
+reset으로 돌려도 branch는 생성 및 돌아가지 않는다
+
+
+issue
+코드에 이의 제기 등
+공동작업자 이상 급은 라벨 설정 가능
+label
+직접 제작 가능
+
+milestone
+
+
+project
+board
+table
+roadmap
+
+ignore하면 좋은 파일
+class 파일
+
+push시 모든 branch 업로드 : --all
+
+master 브랜치 보호 : require a pull request before merging 체크
+	reqire approval : 동의자 숫자 설정
+	do not allow bypassing the above setting 체크
+
+master push 후 remote: error: GH006: Protected branch update failed for refs/heads/master. 가 뜨면 보호 적용

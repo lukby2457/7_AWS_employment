@@ -1,0 +1,23 @@
+공동작업자여도 업로드할 때는 pull requests
+
+다른 사람의 원격지에서 내 원격지로 들고오는 것 = fork
+fork 한 본인 저장소 주소를 clone
+내 저장소로 인식되어서 마음대로 push 해도 됨
+
+후에 원격지 저장소로 합치는 요청을 보내는 것 = pull requests
+base repository의 branch를 선택해서
+head repository의 branch를 pull requests 할 수 있다
+
+branch를 선택해서 pull requests가 가능하다
+
+원본 저장소에서 
+close with comment = 거절
+merge pull request = 실제 합체
+
+
+master push를 막고
+
+
+
+
+작업 후 원본 저장소로 
