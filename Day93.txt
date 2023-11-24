@@ -1,0 +1,66 @@
+centos (redhat 기반)	RPM 패키지
+
+ubuntu (데비안 기반)	구성은 비슷한데 명령어가 살짝 다름 (기본 명령어는 동일)
+
+발표시
+	코드는 중요한 부분만
+	실행은 안 보여줘도 됨
+	제출할 때는 구현 100%
+	발표는 구현 안 되어도 발표하기도 함
+
+repository TestSpring 참조
+
+
+
+VMware
+15.5
+
+test 환경
+memory 1
+ram 2GB
+
+briged networking => 컴퓨터와 동일한 네트워크 환경
+network address translation => 네트워크 재분배
+
+I/O	recommend
+
+Disk	SCSI
+Create 윈도우에 disk생성
+Capacity = 40GB
+Allocate = 미리 확보 (체크x)
+자주 옮긴다 split
+안 옮긴다 single
+
+한국어
+
+최소 설치 -> 서버-GUI사용
+파티션 자동 -> 수동
+/ 	200M 		ext4
+/boot	200M(관례) 	ext4
+/home	1G			(= 일반 계정을 많이 생성할거면 더 많이 줘도 된다)
+/var	4G			(= 보통 전체의 1/10 정도)
+/usr	10G			(= 보통 전체의 1/3 정도)
+swap	memory*2 4G		(= 보통 메모리의 2배)
+
+그 후 / 	남은 용량 전부
+
+root pw : 1
+itbank pw : qwe@123
+
+네트워크 세팅
+1= 윈도우
+2= NAT 게이트웨이 (없으면 데이터 통신 x)
+100= oracle Linux
+
+nat 세팅
+VMnet8	192.168.1.0
+Gateway 192.168.1.2
+
+setting
+자동으로 연결
+ipv4
+192.168.1.50	255.255.255.0	192.168.1.2
+
+
+ip 사용중 확인
+angry ip scanner
