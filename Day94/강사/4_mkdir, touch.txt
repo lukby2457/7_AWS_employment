@@ -1,0 +1,62 @@
+1. mkdir (make directory)
+- 디렉토리 생성 명령어
+
+명령어)
+mkdir [옵션] [대상]
+
+옵션)
+-p	parents, 상위 디렉토리도 같이 생성
+
+※ 대상은 띄어쓰기로 구분해서 여러개를 줄 수 있다
+mkdir ab cd	현재 디렉토리에 ab와 cd를 생성
+mkdir /abc def	abc는 최상위(/) def는 현재 디렉토리에 생성
+
+
+2. rmdir (remove directory)
+- 빈 디렉토리 제거 명령어
+
+명령어)
+rmdir [대상]
+
+
+3. touch
+- 빈 파일 생성 및 파일의 시간 정보 조작
+
+명령어)
+touch [옵션] [대상]
+
+옵션)
+-t [yyyy]mmddhhmm
+
+
+ex)
+touch ex01.txt		ex01.txt 빈 파일을 생성
+touch ex01.txt		이미 있으면 현재 시간으로 변경
+
+touch -t 202311091222 ex01.txt
+- 2023/11/09 12:22분으로 변경
+
+
+4. date
+- 현재 시간 정보를 출력 및 설정
+
+ex)
+date		현재 로컬에 세팅된 시간을 출력
+date 0912135523 9월/12일 13시 55분 23년으로 설정	
+
+
+5. rdate
+- 원격지의 시간 정보를 출력 및 설정
+
+ex)
+rdate time.bora.net	지정 사이트의 시간을 출력
+rdate -s time.bora.net	원격지의 시간을 로컬에 동기화
+
+
+6. cal
+- 캘린더(달력)을 출력
+
+ex)
+cal		현재 달의 달력을 출력
+cal 2023	2023년 달력 모두 출력
+

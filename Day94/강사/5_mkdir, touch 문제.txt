@@ -1,0 +1,49 @@
+1.최상위에 mktest, touchtest 라는 디렉토리 생성
+답)
+mkdir /mktest /touchtest
+ls /
+
+
+2.현재 경로를 /로 이동한 뒤 mktest 안에 a, b, c 라는 디렉토리 생성
+답)
+cd /mktest/
+mkdir a b c
+ls 
+
+
+3.그대로 / 에서 touchtest 에 1, 2, 3 이라는 파일 생성
+답)
+touch touchtest/1 touchtest/2 touchtest/3
+ls -l touchtest/
+
+※ 아래는 참고용
+touch touchtest/{1..3}
+
+
+4.touchtest 에 1번파일을 본인생일로 날짜 변경
+답)
+touch -t 200205301444 touchtest/1
+ls -l touchtest/
+
+
+5.mktest 로 이동뒤 1, 2, 3, abc 라는 파일 한줄로 생성
+답)
+cd /mktest/
+mkdir 1 2 3 abc
+ls -l
+
+
+6.touchtest 로 이동 뒤 abc 라는 디렉토리 생성, aaa 라는 디렉토리 mktest에 생성, / 에 bbb라는 디렉토리 생성
+답)
+cd /touchtest/
+mkdir abc /mktest/aaa /bbb
+ls -l . /mktest/ /
+
+
+7.mktest에 a 라는 디렉토리의 날짜 정보를  / 에 bbb와 똑같이 맞추기.
+답)
+touch -t 11271454 /mktest/a
+ls -ld /bbb/ /mktest/a/
+
+
+
