@@ -1,0 +1,56 @@
+1. /etc/login.defs /etc/inittab 파일을 확인하고
+   2개의 파일 /backup 디렉토리 생성한 뒤 복사
+답)
+ls -l /etc/login.defs
+ls -l /etc/inittab
+
+mkdir /backup
+ls -d /backup
+
+cp /etc/login.defs /backup/
+cp /etc/inittab /backup/
+
+ls -l /backup/
+
+
+2. /backup에 있는 2개의 파일
+   /backup/test 디렉토리에 각각 login init 란 이름으로 이름변경 복사
+답)
+cp /backup/inittab /backup/test/init
+cp /backup/login.defs /backup/test/login
+
+ls -lR /backup/
+
+
+3. /backup에 test1 이라는 파일 ,
+	/backup/test 에 test2 라는 파일을 명령어로 생성
+답)
+touch /backup/test1
+touch /backup/test/test2
+ls -lR /backup/
+
+
+4. /backup/test 디렉토리를
+   /home/test/c/d/linux란 이름이 되도록 이름변경 보존 복사
+답)
+
+mkdir -p /home/test/c/d/	
+(※ linux디렉토리가 이미있으면 그 하위에 생성됨)
+
+cp -r /backup/test /home/test/c/d/linux/
+ls -R /home/test/
+
+
+5. /home으로 이동(cd /home) 한뒤
+   경로를 변경하지 않고 /backup안에 있는 "파일"들 3개를   
+   /home/test/c/d/test
+   디렉토리에 명령으로 보존복사
+답)
+cd /home/
+cp -rp /backup/ /home/test/c/d/test
+rm -rf /home/test/c/d/test/test
+ls -R /home/test/
+
+
+
+

@@ -1,0 +1,27 @@
+입출력 기호
+
+1. < 	: 입력 (읽기)
+2. >	: 출력 (쓰기)
+3. >>	: 출력 (쓰기)
+
+
+실습)
+echo hello		: 콘솔에 출력
+echo hello > test1.txt	: test1.txt에 출력 (덮어쓰기)
+echo hello >> test1.txt	: test1.txt에 출력 (맨 뒤 추가)
+
+cat < test1.txt		: cat은 기본이 <라 생략 가능
+
+cat > ex01.txt		
+- 작성한 내용을 ex01.txt에 출력
+- 다 작성 후 빈 줄 추가 후 ctrl + d를 누르면 저장됨
+
+cat ex01.txt test1.txt
+- ex01.txt를 출력 후 test1.txt를 출력
+- 즉, 두 문서를 이어서(concatenate) 출력
+
+cat ex01.txt test1.txt > result.txt
+- 이어놓은 두 문서의 내용을 새파일(result.txt)에 출력
+
+ls -l / > lsResult.txt
+- ls의 결과를 새 파일에 출력

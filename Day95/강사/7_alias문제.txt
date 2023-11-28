@@ -1,0 +1,30 @@
+1. a1 = /alias 디렉토리 생성
+답)
+alias a1='mkdir /alias'
+
+
+2. a2 = /alias 디렉토리 내부에 test1파일 test2 디렉토리 생성
+답)
+alias a2='
+> touch /alias/test1
+> mkdir /alias/test2'
+
+
+3. a3 = /alias 디렉토리 강제 삭제
+답)
+alias a3='rm -rf /alias'
+
+
+4. a4 = /alias 디렉토리를 생성하면서 내부에 test1 파일 test2 디렉토리 생성
+답)
+alias a4='
+> a1
+> a2'
+
+
+5. 작성한 alias를 모두 제거
+답)
+unalias a1
+unalias a2
+unalias a3
+unalias a4

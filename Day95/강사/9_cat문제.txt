@@ -1,0 +1,23 @@
+1. /etc/shadow 파일을 행번호를 붙여 출력하라.
+답)
+cat -n /etc/shadow
+
+
+2. /etc/group 이라는 파일을 위에서 8줄만 출력하라.
+답)
+head -8 /etc/group | cat -n
+
+
+3. / 에 디렉토리 목록을 밑에서 두줄만 출력하라. 
+답)
+ls -l / | cat -n | tail -2
+
+
+4. /etc 의 목록을 5줄씩 출력하라.
+답)
+ls -l /etc/ | cat -n | more -5
+
+
+5. /home 을 행번호를 붙이고 목록확인하여라.
+답)
+ls -l /home/ | cat -n
