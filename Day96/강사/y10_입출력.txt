@@ -1,0 +1,90 @@
+입출력 기호
+
+1. < 	: 입력 (읽기)
+2. >	: 출력 (쓰기)
+3. >>	: 출력 (쓰기)
+
+
+실습)
+echo hello		: 콘솔에 출력
+echo hello > test1.txt	: test1.txt에 출력 (덮어쓰기)
+echo hello >> test1.txt	: test1.txt에 출력 (맨 뒤 추가)
+
+cat < test1.txt		: cat은 기본이 <라 생략 가능
+
+cat > ex01.txt		
+- 작성한 내용을 ex01.txt에 출력
+- 다 작성 후 빈 줄 추가 후 ctrl + d를 누르면 저장됨
+
+cat ex01.txt test1.txt
+- ex01.txt를 출력 후 test1.txt를 출력
+- 즉, 두 문서를 이어서(concatenate) 출력
+
+cat ex01.txt test1.txt > result.txt
+- 이어놓은 두 문서의 내용을 새파일(result.txt)에 출력
+
+ls -l / > lsResult.txt
+- ls의 결과를 새 파일에 출력
+
+
+
+파일 디스크립터(FD)
+- 파일을 다루기 위한 추상적인 데이터
+
+0	: 표준 입력
+1	: 표준 출력
+2	: 표준 에러 출력
+
+
+ex)
+cat < test1.txt == cat 0< test1.txt
+- 좌우는 동일한 구문
+- 0은 입력이고 기본적으로 생략해도 된다
+
+
+ls test1.txt >> success.txt == ls test1.txt 1>> success.txt
+- 표준 출력 >, >>는 기본적으로 1의 FD를 가진다
+- 따라서, 올바른 출력만 지정 파일에 출력(= 작성)된다
+
+
+ls hello 2>> fail.txt
+- FD 2는 표준 에러를 의미
+- 즉, 에러 메세지만 지정 파일에 출력
+
+
+
+※ find는 뒤에서 자세히
+- 실습은 itbank 계정으로 진행
+
+1. find / -name "*ssh*"
+- 모든 출력(= 정상/에러)이 콘솔에 출력
+
+
+2. find / -name "*ssh*" 2>> fail.txt
+- 에러 출력(2)은 모두 fail.txt에
+- 즉, 콘솔에는 정상 출력만
+
+
+3. find / -name "*ssh*" 2>> /dev/null
+- 에러 출력(2)은 모두 /dev/null 장치 파일에 출력
+- /dev/null은 필요 없는 결과 및 출력을 버리는 장비
+- 즉, 에러 같은 출력을 남기고 싶지 않을때 자주 사용
+
+
+4. find / -name "*ssh*" >> success.txt
+- 표준 출력(1)은 모두 success.txt에
+- 에러 출력은 지정되지 않았으므로 콘솔에 출력
+- 성공한 결과만 파일로 남기고 싶은 경우 사용
+
+
+5. find / -name "*ssh*" > total.txt 2>&1
+- 표준 출력(1)은 total.txt에 출력
+- 표준 에러(2)는 표준 출력(1)과 같은 파일에 출력
+- 즉, 모든 출력이 total.txt에 출력됨
+- 가독성이 떨어지기 때문에 별로 권장하진 않음
+
+
+6. find / -name "*ssh*" > success.txt 2> fail.txt
+- 표준 출력(1)은 success.txt에
+- 표준 에러(2)는 fail.txt에 출력
+- 별도로 관리하기 때문에 가독성 및 유지보수에 효과적

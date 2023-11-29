@@ -1,0 +1,12 @@
+viTest
+스테이징이 된 후 커밋이 되면
+해당 파일은 git의 관리를 받게 된다
+즉, 파일이 변경시 git에 의해서 추적(tracked)을 받는다
+
+추적을 받는 파일은 .gitignore에 등록해도 적용되지 않는다
+
+※ putty에서 ctrl + s는 일시정지
+※ 해제하려면 ctrl + q
+
+ignore 테스트
+추가

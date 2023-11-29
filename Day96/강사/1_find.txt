@@ -1,0 +1,72 @@
+1. find
+- 특정 파일을 찾기 위한 명령어
+
+명령어)
+find [경로] [옵션] [대상]
+
+옵션)
+-name		이름으로 검색
+-empty		파일 크기가 0byte 파일
+-type		파일의 유형으로 검색
+-atime		접근시간(access)으로 검색
+-mtime		수정시간(modify)으로 검색
+-ctime		변경시간(change)으로 검색
+-exec		검색 결과를 다른 명령어에 연결시
+
+※ mtime : 파일의 내용이나 이름이 변경시 적용
+※ ctime : mtime + 속성/권한/소유자 변경시 적용
+※ touch로 변경되는 시간은 atime, mtime
+※ 즉, ctime 절대로 임의로 변경이 불가능
+
+
+실습)
+find / -name "*itbank*"
+- itbank라는 이름을 포함한 파일 및 디렉토리를 검색
+
+
+find / -name "*itbank*" -exec ls -ld {} \;
+- find로 찾은 내용을 -exec에 작성된 명령어에 넘긴다
+- 넘긴 데이터는 {}에 채워진다
+
+
+find / -name "*itbank*" -exec ls -ld {} \; 2> /dev/null
+- 위랑 결과는 동일. 단, 에러 메세지는 모두 버린다
+
+
+find / -name "*itbank*" -type f
+- 이름에 itbank를 포함하는 파일 중 일반파일만 검색
+- f는 일반파일, d는 디렉토리
+
+
+find . -name "*test*" -empty -exec rm -rf {} \;
+- 현재 디렉토리(.)에서 test라는 이름을 포함한 빈 파일을 찾는다
+- 검색된 파일은 rm -rf에 전달되어 삭제된다
+
+
+※ stat 파일명 : 파일의 속성 정보를 출력
+
+
+find . -mtime -1
+- mtime이 1일이 지나지 않은 안되는 파일 
+- ex) 현재 : 29일 11:30분, 파일 : 28일 12:30분
+
+
+find . -mtime 1
+- mtime이 1일이 지나고 2일 안되는 파일
+
+
+find . -mtime +1
+- 2일이 넘는 파일들
+
+   (27 11:30) (28 11:30)  (29 11:30)
+       2          1          현재 
+-----------------------------------
+       │          │          │
+  +1        1          -1
+
+
+
+
+
+
+

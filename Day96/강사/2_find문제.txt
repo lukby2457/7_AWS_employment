@@ -1,0 +1,25 @@
+1. inittab 이라는 파일을 찾아보아라.  
+답)
+find / -name "*inittab*"
+
+ 
+2. /etc/ 에서 생성된지 60 분 이내의 파일을 찾아보아라.  
+답)
+find /etc -cmin -60 -exec ls -ld {} \;
+
+
+3. /etc/ 에 디렉토리 skel 을 찾아보아라.  
+답)
+find /etc -name "*skel*" -type d
+
+
+4. inittab 파일 검색 후 검색한 파일의 아래서부터 12번째 줄까지 출력 
+답)
+find /etc/ -name "*inittab*" -exec tail -12 {} \; | cat -n
+
+ 
+5. grub.conf  login.defs  inittab 파일을 검색 결과를 ls -l로 출력 
+답)
+find / -name "*grub.conf*" -exec ls -l {} \;
+find / -name "*login.defs*" -exec ls -l {} \;
+find / -name "*inittab*" -exec ls -l {} \;

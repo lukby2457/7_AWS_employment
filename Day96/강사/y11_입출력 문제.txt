@@ -1,0 +1,20 @@
+1. LINUX 라고 작성된 SERVER 파일을 만들어라. 
+답)
+echo LINUX > SERVER
+
+
+2. USER HEATH 라고 작성된 USER 파일을 만들어라.
+답)
+cat > USER
+HEATH
+ctrl + d
+
+
+3. USER PASSWD 라고 작성된 PASS 파일을 만들어라.
+답)
+echo "USER PASSWD" > PASS
+
+
+4. PASS 안에 전에 작성된거 지우며 123123 을 작성하여라.
+답)
+echo 123123 > PASS
