@@ -1,0 +1,138 @@
+1. Service
+- 내가 만든 무언가를 남에게 제공하는 것
+- 그 대가로 특정 보상을 기대하고 제공한다
+- 어떠한 상품이나 행위를 제공하는 것
+- 그에 대한 대가로 특정 이득을 기대할 수 있다
+
+※ 대표적인 it 서비스들
+웹, 원격 접속, 메일, SNS, DB, Game 등
+
+2. server
+- 서비스를 제공하는 자
+
+3. client
+- 서비스를 이용하는 자
+
+4. Server를 구축할 땐 주로 Linux 혹은 Window Server OS를 자주 사용
+- 그 중 Open Source인 Linux가 자주 사용됨
+
+
+CentOS에서 서비스를 구축하는 방법
+1. rpm 명령
+- package(설치 파일)을 직접 가지고 있어야 한다
+- 온라인이 아니더라도 패키지만 있으면 설치 가능
+- 단, package 간에 의존성은 직접 해결해야 한다
+- 최소한의 설치로 최적화 가능
+
+2. yum 명령
+- package를 가지고 있지 않아도 원격지에서 다운로드해서 설치
+- 온라인 상태여야만 가능
+- 실제로 필요하지 않은 패키지도 설치될 가능성이 있다
+
+
+실습)
+CentOS 7에 yum으로 웹 서비스 구축
+
+1) yum install -y httpd
+- 웹서비스(httpd)를 설치
+- y는 설치시 질의를 모두 yes로 처리
+
+2) netstat -lntup
+- 네트워크 상태를 확인
+- l : listen, 연결을 대기중인 서비스
+- n : number, 서비스의 포트 번호
+- t : tcp
+- u : udp
+- p : protocol
+
+※ 현재 tcp 80(http)는 보이지 않음
+
+3) systemctl status httpd
+- httpd에 대한 서비스 상태를 확인 (출력 x / error => )
+- preset: disabled은 서버 부팅시 실행 여부를 나타냄
+- Active: inactive는 현재 실행 상태를 나타냄
+
+4) systemctl restart httpd
+- httpd 서비스를 재실행
+
+5) CentOS에서 웹브라우저로 접근해본다
+- url에 127.0.0.1을 입력 -> 접근됨
+
+6) Window에서 웹브라우저로 접근해본다
+- url에 192.168.1.10(= 서버 주소) -> 접근 안 됨
+- 왜? 방화벽(= 보안)이 설정되어 있기 때문
+
+7) firewall-cmd --add-service=http
+- 방화벽에 http 서비스를 허용하도록 등록
+
+8) firewall-cmd --list-all
+- 여기서 http 서비스가 있는지 확인 후
+- window에서 다시 접근해본다 -> 접근됨
+
+9) 재부팅 후 설정 확인
+- 위의 세팅은 현재 일시적으로 적용
+- 재부팅시 모두 설정이 지워진다
+
+10) systemctl enable httpd
+- http를 부팅시 자동으로 실행되게 적용
+
+11) firewall-cmd --permanent --add-service=http
+- 방화벽도 부팅시 자동으로 http 서비스를 허용하도록 등록
+
+
+※ scp : ssh를 활용한 파일 전송(= 복사)
+- ssh 기반이므로 tcp/22 포트를 활성화 해야한다
+
+명령어)
+scp [원본] [대상]
+
+ex)
+scp test1.txt root@192.168.1.10:/var/www/html/
+- 현재 로컬(= 내 pc)의 test1.txt를
+- 192.168.1.10(= 서버)의 /var/www/html/에 복사(= 업로드)
+
+scp root@192.168.1.10:/var/www/html/ex01.txt .
+- 192.168.1.10의 ex01.txt를 로컬의 현재 디렉토리에 복사(= 다운로드)
+
+
+
+※ service = daemon
+
+인스턴스 시작 = 컴퓨팅 만들기
+이름 설정
+AMI = 기본말고 검색으로 하면 더 찾을 수 있다
+인스턴스 = free tier
+키 페어 = 이것이 있어야 컴퓨터에서 접속 가능
+네트워크 = 보안그룹을 편집해서 이름 변경
+스토리지 = 30
+
+linux 종료 = 인스턴스 중지 (종료는 삭제)
+
+
+
+1. sudo (super user do)
+- 일반 계정이 관리자 권한을 얻어서 명령을 수행하는 명령
+- 우리는 실습에서 root 계정을 바로 사용했지만
+- 이는 실무에서 별로 바람직하지 않다
+- 보안성 저하와 작업 위험도 증가
+
+※ 인증 : 적합자인지 검사하는 과정
+인가 : 인증 성공 후 수행할 수 있는 작업
+
+2. sudo를 쓰기 위한 절차
+- 아무 계정이나 sudo를 사용할 수 없다
+- 왜? 관리자 대행 권한이니까~
+- /etc/sudoers라는 파이에 계정/그룹을 등록해야 사용 가능
+
+과정) 관리자 계정으로 수행
+1. vi /etc/sudoers
+
+2. 107번 줄 활성화를 확인
+- # 처리 확인 (만약 앞에 #이 붙어 있다면 # 제거)
+
+3. sudo를 사용할 계정을 wheel이라는 그룹에 추가한다
+usermod -G wheel [계정] 실행
+
+4. id [계정]을 입력해서 wheel 그룹이 있는지 확인
+
+5. 그룹 받은 계정에서 sudo ls -l /root를 실행해본다

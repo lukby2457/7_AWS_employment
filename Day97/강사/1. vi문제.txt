@@ -1,0 +1,43 @@
+1. /etc/inittab 파일을 /backup으로 복사한 뒤 
+   다음과 똑같은 내용으로 편집해보세요~ (vi /backup/inittab 실행한 상태에서 절대 나가지말것!!) 
+
+# Default runlevel. The runlevels used are: 
+#   0 - halt (Do NOT set initdefault to this) 
+   0 - halt (Do NOT set initdefault to this) 
+#   1 - Single user mode 
+   1 - Single user mode 
+#   2 - Multiuser, without NFS (The same as 3, if you do not have networking) 
+   2 - Multiuser, without NFS (The same as 3, if you do not have networking) 
+#   3 - Full multiuser mode 
+#   3 - Full mode 
+#   4 - unused 
+#   4 - unused 
+   4 - un 
+#   5 - X11 
+#   5 - X11=Xwindows, GUI 
+#   6 - reboot (Do NOT set initdefault to this) 
+   6 - reboot (Do NOT set initdefault to this) 
+# 
+#id:5:initdefault: 
+#id:0:default: 
+id:3:initdefault: 
+ 
+
+*****아래 문제 vi /backup/inittab 실행한 상태에서 절대 나가지말고 진행!! 
+2. /vi 디렉토리를 생성하고 안에 1 2 3 4 파일 4개와 a1 a2 a3 a4 디렉토리 4개 생성 
+ 
+
+3. /vi 디렉토리 안의 목록을 출력후 파일만 문서 가장위에 추가되게 편집 
+ 
+
+4. 문서 마지막에 /vi 디렉토리 목록을 출력한 뒤 a1 a2 a3 a4 디렉토리 목록만 남도록 편집 (<= 잘 읽어볼것) 
+ 
+
+5. 4번의 내용을 12번째 줄에 삽입한 뒤 /backup/heath로 저장 
+ 
+
+6. 문서의 모든 root 를 heath로 치환한 뒤에 /backup/heath1 로 저장 
+
+ 
+7. 새 문서를 열어서 ip 내용(ifconfig)을 삽입한뒤에 /backup/heath2 로 저장 
+ 

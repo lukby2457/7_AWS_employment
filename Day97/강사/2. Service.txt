@@ -1,0 +1,111 @@
+1. Service
+- 어떠한 상품이나 행위를 제공하는 것
+- 그에 대한 대가로 특정 이득을 기대할 수 있다
+
+※ 대표적인 it 서비스들
+웹, 원격, 메일, SNS, DB, Game 등
+
+
+2. Server
+- 서비스를 제공하는 자
+
+3. Client
+- 서비스를 이용하는 자
+
+
+4. Server를 구축할 땐 주로 Linux 혹은 Window Server OS를 자주 사용
+- 그 중 Open Source인 Linux가 자주 사용됨
+
+
+
+CentOS에서 서비스를 구축하는 방법
+1. rpm 명령
+- package(설치 파일)을 직접 가지고 있어야 한다
+- 온라인이 아니더라도 패키지만 있으면 설치 가능
+- 단, package 간에 의존성은 직접 해결해야 한다
+- 최소한의 설치로 최적화 가능
+
+2. yum 명령
+- package 가지고 있지 않아도 원격지에서 다운로드해서 설치
+- 온라인 상태여야만 가능
+- 실제로 필요하지 않은 패키지도 설치될 가능성이 있다
+
+
+실습) CentOS7에 yum으로 웹 서비스 구축
+
+① yum install -y httpd
+- 웹서비스(httpd)를 설치 
+- y는 설치시 질의를 모두 yes로 처리
+
+
+② netstat -lntup
+- 네트워크 상태를 확인
+- l : listen, 연결을 대기중인 서비스 
+- n : number, 서비스의 포트 번호
+- t : tcp
+- u : udp
+- p : protocl
+
+※ 현재 tcp 80(http)는 보이지 않음
+
+
+③ systemctl status httpd
+- httpd에 대한 서비스 상태를 확인
+- preset: disabled은 서버 부팅시 실행 여부를 나타냄
+- Active: inactive는 현재 실행 상태를 나타냄
+
+
+④ systemctl restart httpd
+- httpd 서비스를 재실행
+
+⑤ CentOS에서 웹브라우저로 접근해본다
+- url에 127.0.0.1을 입력 -> 접근됨
+
+⑥ Window에서 웹브라우저로 접근해본다
+- url에 192.168.1.10(= 서버 주소) -> 접근 안됨
+- 왜? 방화벽(= 보안)이 설정되어 있기 때문
+
+⑦ firewall-cmd --add-service=http
+- 방화벽에 http 서비스를 허용하도록 등록
+
+⑧ firewall-cmd --list-all
+- 여기서 http 서비스가 있는지 확인 후
+- window에서 다시 접근해본다 -> 접근됨
+
+⑨ 단, 위의 세팅은 현재 일시적으로 적용됨
+- 재부팅시 모두 설정이 지워진다
+
+⑩ systemctl enable httpd
+- http를 부팅시 자동으로 실행되게 적용
+
+⑪ firewall-cmd --permanent --add-service=http
+- 방화벽 설정이 부팅시 자동으로 적용되게
+
+
+※ scp : ssh를 활용한 파일 전송(= 복사)
+- ssh 기반이므로 tcp/22 포트를 활성화 해야한다
+
+명령어)
+scp [원본] [대상]
+
+ex)
+scp test1.txt root@192.168.1.10:/var/www/html/
+- 현재 로컬(= 내 pc)의 test1.txt를
+- 192.168.1.10(= 서버)의 /var/www/html/에 복사(= 업로드)
+
+scp root@192.168.1.10:/var/www/html/ex01.txt .
+- 192.168.1.10의 ex01.txt를 로컬의 현재 디렉토리에 복사(= 다운로드)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
