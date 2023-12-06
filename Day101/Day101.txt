@@ -1,0 +1,372 @@
+Database 서비스
+인스턴스만 제작 -> 원하는 데이터베이스 설치, 데이터베이스 생성, 계정 생성 등 모든 걸 자신이 직접 설치 (제어범위가 전체 범위, 온프레미스와 차이점은 하드웨어만 빠지는 관리부담은 거의 그대로)
+
+서비스 이용 -> 관리적인 업무가 AWS로 넘어간다 (RDS는 데이터베이스 생성 부터, 내 소유로 인스턴스 제작)
+
+비관계형
+관계 형성이 없다 (스키마 구성 X)
+비정형 데이터도 처리 가능 (스키마가 동적)
+문서 수집에 집중 (= 쓰기 작업이 많을 때)
+IOT 장비 데이터 수집, 쇼핑몰(장바구니, 관심 물품 등록) 할 때 많이 사용
+
+관계형도 수평적 확장 가능 (= 읽기 요청이 많을 때)
+
+
+Dynamo DB
+Amazon의 장바구니 DB 해결을 위해 개발된 DB
+완전관리형
+서버리스 (내 소유 DB가 만들어지지 않는다)
+
+테이블 이름이랑 키(파티션 키 (필수, 어떤 항목을 동일한 파티션에 묶어줄 것이냐)/ 정렬 키)를 설정하면 생성된다
+
+파티션 키 + 정렬키 = 기본 키
+
+로컬 보조 인덱스 (테이블 생성 시 보조 인덱스도 같이 생성, 테이블 제작 이후에는 제작 및 삭제 불가)
+파티션과 소팅을 다르게 지정
+기존 테이블의 용량을 공유해서 사용
+
+글로벌 보조 인덱스 (그 이후 생성 및 삭제 가능)
+파티션과 소팅을 다르게 지정
+용량을 따로 관리
+
+용량이 부족할 때는 에러 발생 -> 다시 요청하는 방식으로 문제 해결
+지연 -> 용량이 늘어날 때
+
+온디맨드 (용량부족에 대한 문제는 해결, 쿼리가 발생하는대로 처리해서 비용 증가)
+
+생성
+create table
+name
+partition key
+sort key - optional
+
+on-demand
+용량 제한 x, 요청을 모두 처리
+
+provisioned
+용량 제한, 읽기 쓰기 처리 용량 설정 가능
+
+비동기식 요청
+
+항목 로드 = 테이블 초기화
+
+GetItem = 기본값으로 최종 읽기 일관성 제공 (동기화 작업 중 내부 시간), 강력한 일관성 읽기 (함수로 구현 해야 함, 일관성 유지 문제는 해결, 읽기 비용이 2배로 증가)
+결과 반환 = 1MB 사이즈 결과만 반환
+
+scan = 키가 아닌 속성으로 검색 (전체 테이블 검색)
+
+updateItem 등 요청 = 비조건부 작업 (조건을 추가할때는 condition-expression 추가)
+
+캐싱
+성능을 높임
+자주 사용하는, 변경이 자주 되지 않는 대상으로 캐싱
+쿼리를 처리하는데 시간이 오래 걸림, 비용이 많이 청구 될 수 있을 때
+
+DAX
+데이터가 없으면 알아서 DB를 읽어준다
+
+ElastiCache
+Ram에 DB를 만들어서 캐싱
+개발자가 따로 어플리케이션을 구성해주어야 한다 (캐싱될 데이터를 Elasti에 추가 및 업데이트를 원본이랑 Elasti에 같이 업데이트)
+
+RDS
+Subnet groups를 먼저 생성해야 함 (관리하는 네트워크 중 어디에 생성할 거냐)
+	name, description 필수
+	vpc
+
+	Availability Zone (서로 다른 가용영역의 subnet이 2개 이상 선택해야 한다, 안 하면 RDS 생성 불가)
+	subnet의 이름이 표시 되지 않음 (vpc의 subnet에서 확인, 보통 private subnet을 선택)
+
+Create databases
+Engine 선택
+Template 선택 (free tier는 유료 옵션을 꺼준다)
+
+Master username = Master 계정 이름
+Confirm master password = Master 계정 password
+
+instance configuration
+storage
+
+RDS는 외부에서 연결 안 되게 하주는 것이 좋다 (connect옵션도 선택 가능, 권장하진 않음)
+Public access 
+
+Additional configuration (큰 제목)
+DB 생성을 지정할 수 있음
+Backup
+Maintenance : Enable auto minor version upgrade 끄는 것을 권장
+
+실습
+aws dynamodb create-table ^
+  --table-name Notes ^
+  --attribute-definitions AttributeName=UserId,AttributeType=S AttributeName=NoteId,AttributeType=N ^
+  --key-schema AttributeName=UserId,KeyType=HASH AttributeName=NoteId,KeyType=RANGE ^
+  --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 
+DynamoDB는 CreateTable 요청을 수신하는 즉시 TableStatus가 CREATING인 응답을 반환
+테이블이 생성되면 DynamoDB가 TableStatus를 ACTIVE로 설정합니다. 읽기 및 쓰기 작업은 ACTIVE 테이블에서만 수행
+
+테이블이 생성될 때까지 대기 -> wait table-exists를 사용
+aws dynamodb wait table-exists --table-name Notes
+
+
+테이블의 현재 상태를 반환
+aws dynamodb describe-table --table-name Notes | findstr TableStatus
+
+DynamoDB client를 빌드하고 client에 대한 document API wrapper를 정의
+//Create DynamoDB client
+AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+                .build();
+
+//Use the DynamoDB document API wrapper
+DynamoDB dynamoDB = new DynamoDB(client);
+
+PUT-ITEM에 대한 요청 생성
+put-item에 대한 요청을 빌드
+table.putItem(
+               new Item()
+               .withPrimaryKey("UserId", userId, "NoteId", noteId)
+               .withString("Note", note)
+                );
+
+Maven으로 mvn -q exec:java -Dexec.mainClass="dev.labs.dynamodb.notesLoadData"
+DynamoDB에 put요청을 보내서 전체 데이터 출력
+
+파티션 키 및 프로젝션을 사용하여 데이터 쿼리
+파티션 키와 withProjectExpression을 사용하는 QuerySpec 요청을 빌드
+QuerySpec spec = new QuerySpec()
+                .withProjectionExpression("NoteId, Note")
+                .withKeyConditionExpression("UserId = :v_Id")
+                .withValueMap(new ValueMap()
+                        .withString(":v_Id", userId));
+쿼리는 해당 파티션 키 값을 가진 모든 항목을 반환
+선택적으로 정렬 키 속성을 제공, 비교 연산자를 사용하여 검색 결과를 세분화
+이 경우 noteID를 전달함으로써 사용자 student에 속하는 다른 노트를 제외
+
+QueryOutcome 요청을 빌드
+ItemCollection<QueryOutcome> items = table.query(spec);
+DynamoDB 클라이언트를 사용하는 쿼리에는 하위 수준 요청이 필요하고 QueryResult 개체로서 하위 수준 응답을 반환
+
+Maven으로 mvn -q exec:java -Dexec.mainClass="dev.labs.dynamodb.notesQuery"
+user_id=student가 작성한 NoteId 및 Note만 포함
+
+Paginator를 사용하여 테이블 스캔
+withFilterExpression 및 withProjectionExpression을 사용하는 ScanSpec 요청을 빌드
+ScanSpec scanSpec = new ScanSpec()
+                .withFilterExpression("contains (Note, :v_txt)")
+                .withValueMap(new ValueMap().withString(":v_txt", searchText))
+                .withProjectionExpression("UserId, NoteId, Note");
+필터 표현식 함수 begins with : 속성 값의 첫 문자 몇 개를 확인
+
+Maven으로 mvn -q exec:java -Dexec.mainClass="dev.labs.dynamodb.notesScan"
+Limit 파라미터를 사용하는 경우 단일 Scan 작업은 최대 수까지 항목 세트를 읽음. FilterExpression을 사용하여 결과에 필터링을 적용. 따라서 검색 텍스트 SQL이 일치하면 스캔된 응답에서 단 한 페이지가 반환되고 표시
+
+테이블의 항목 업데이트
+새 속성 추가
+UpdateSpec 요청을 빌드
+UpdateItemSpec updateItemSpec = new UpdateItemSpec()
+.withPrimaryKey("UserId", userId, "NoteId", noteId)
+.withUpdateExpression("set #inc = :val1")
+.withNameMap(new NameMap()
+.with("#inc", "Is_Incomplete"))
+.withValueMap(new ValueMap()
+.withString(":val1", "Yes"))
+.withReturnValues(ReturnValue.ALL_NEW);
+
+Maven으로 mvn -q exec:java -Dexec.mainClass="dev.labs.dynamodb.notesUpdate"
+응답에 새 속성 Is_Incomplete가 Yes로 추가되었고 모든 속성이 반환
+
+DynamoDB 콘솔 > Tables > Notes > Actions  > Explore Items > View Items >  Notes Scan > Notes  > Run을 열어서 데이터 확인
+
+조건부로 항목 업데이트
+Is_Incomplete을 Is_Incomplete이 Yes로 설정된 경우에만 No로 설정
+
+Is_Complete 속성이 평가
+.withConditionExpression("Is_Incomplete = :v_old")
+
+조건부 확인 실패 예외 캡처하기
+ConditionalCheckFailedException에 대한 catch를 빌드
+catch (ConditionalCheckFailedException e) {
+            System.out.println("\nUPDATE#2 - REPEAT: Printing item after the conditional update for the item - \"" + userId + "\" and \"" + noteId + "\"  - FAILURE:");
+            System.out.println("UpdateItem failed on item due to unmatching condition!");
+            System.err.println(e.getMessage());
+        }
+
+조건부 확인을 사용하여 업데이트 작업을 호출
+//Allow update to the Notes item only if the note is incomplete - SUCCESS
+        updateExistingAttributeConditionally(table, qUserId, qNoteId, newNote);
+
+        //Allow update to the Notes item only if the note is incomplete - FAILURE
+        updateExistingAttributeConditionally(table, qUserId, qNoteId, newNote);
+
+Maven으로 mvn -q exec:java -Dexec.mainClass="dev.labs.dynamodb.notesUpdate"
+첫 번째 업데이트 호출은 조건이 일치하여 성공했으며 업데이트된 속성을 예상대로 반환. 두 번째 업데이트 호출은 조건이 일치하지 않아 실패.
+
+
+애플리케이션 로직 처리
+lambda함수
+
+컴퓨팅 서비스
+인스턴스 : 하드웨어 가상화 (하드웨어를 격리되어 있는 서버들이 공유해서 사용) (필요로 하는 기능이 올라가는 속도가 몇분 단위 (운영체제 부팅 시간 차이)) (EC2)
+컨테이너 : 운영체제 가상화 (운영체제를 격리되어 있는 애플리케이션들이 공유해서 사용) (필요로 하는 기능이 올라가는 속도가 몇초 단위) (단독 단위보다는 오케스트레이션 관리 도구(Kubernetes)랑 같이 사용) (ECS, EKS)
+서버리스 : 이벤트 중심 / 관리할 서버가 없다 (리소스 확보 시간 최소화, 관리 부담 최소화) (AWS에서만 사용가능 / 실행환경이 종속된다) (Lambda)
+
+Lambda
+함수 코드를 등록할 때 function에 지정
+실행 될 때 역할 기능을 이용해서 lambda 함수에 역할을 부여
+
+이벤트 소스 지정(트리거 지정)해서 함수 코드 호출
+권한(코드로 판단)으로 다른 곳에 요청
+
+구조
+코드 (가장 중요) 
+	핸들러 함수 = 진입 지점
+	
+런타임(언어), 계층(재사용, 공유) 정보까지 패키징해서 올려주면 된다
+
+구성 (제약)
+시간제한 제약이 많다
+메모리 할당
+동시성
+
+호출모델
+직접 호출 (= 동기식)
+API Gateway
+
+푸시 (= 비동기식)
+
+풀 (= 폴링 기반)
+
+권한
+호출 (이벤트 소스에 호출 권한)
+실행 (실행 작업에 관한 권한 / 역할로 부여해야 함)
+
+stateless한 코드를 만들어야 한다
+실행이 끝나면 실행환경이 사라진다 (15분)
+상태 정보가 유지되어야 한다면 외부 스토리지 사용하여 데이터 유지
+
+핸들러 함수 (이벤트 객체, 컨텍스트 객체를 전달 받음)
+
+환경 변수 (코드 업데이트 없이 함수 동작 조정, 참조 함수)
+
+계층 (코드 공유)
+만드는 이유
+배포 크기가 클 때, 업데이트를 해야 할 때
+
+
+실습
+AWS Lambda 함수 생성
+AWS Management Console에서 AWS 검색 창을 사용하여 Lambda를 검색한 다음 결과 목록에서 서비스를 선택합니다.
+
+Create function을 선택합니다.
+
+Author from scratch  를 선택합니다.
+
+Function name에 dictateFunction을 입력합니다.
+
+Runtime에는 Java 11 (Corretto) 을 선택합니다.
+
+Change default execution role을 확장하고 Use an existing role을 선택합니다.
+
+Existing role에서 lambdaPollyRole을 선택합니다.
+
+Create function을 선택합니다
+
+
+AWS Lambda 함수 코드에 처리 로직 추가
+환경 변수 TABLE_NAME 및 MP3_BUCKET_NAME을 할당
+set env-parms=TABLE_NAME=Notes, MP3_BUCKET_NAME=<MP3BucketName>
+
+dictateFunction을 환경 변수로 업데이트
+aws lambda update-function-configuration --function-name dictateFunction --environment Variables="{%env-parms%}"
+
+DynamoDB 테이블에서 노트 텍스트를 검색
+var request = GetItemRequest.builder()
+                .tableName(tableName)
+                .key(key)
+                .build();
+적절한 테이블을 대상으로 지정할 수 있는 .tableName(tablename) 속성
+
+AMAZON POLLY를 사용하여 노트 텍스트를 MP3 파일로 변환하는 코드 추가
+노트 텍스트를 사용자가 선택한 voiceId를 사용하는 로컬 MP3 파일로 변환
+pollyclient.synthesizeSpeech(SynthesizeSpeechRequest.builder()
+                    .outputFormat("mp3")
+                    .text(noteText)
+                    .voiceId(voice)
+                    .build(), destfile)
+                    .join();
+.voiceId(voice) 속성을 지정
+
+MP3 파일을 AMAZON S3로 업로드하고 미리 서명된 URL을 생성하는 코드 추가
+MP3 파일을 Amazon S3로 업로드하고 5분 동안 활성 상태가 되는 미리 서명된 URL을 생성
+var presigner = S3Presigner.builder().build();
+            var url = presigner.presignGetObject(GetObjectPresignRequest.builder()
+                    .signatureDuration(Duration.ofMinutes(5))
+                    .getObjectRequest(GetObjectRequest.builder()
+                            .bucket(bucket)
+                            .key(key)
+                            .build())
+                            .build())
+                            .url();
+
+            response = url.toString();
+.signatureDuration(Duration.ofMinutes(5)) = 링크 만료 기간을 지정
+
+
+AWS Lambda 함수 게시
+Maven install 명령을 실행하여 프로젝트 빌드를 생성
+mvn clean install
+
+dictateFunction에 새 코드를 업로드
+aws lambda update-function-code --function-name dictateFunction --zip-file fileb://target/dictateFunction.jar
+Lambda 함수에는 앞서 설정한 값으로 설정된 핸들러가 있음
+함수의 핸들러를 변경 = 메모리 할당과 같은 함수의 다른 구성을 업데이트하고 시간 초과 값을 설정
+
+function handler, memory allocation 및 timeout values를 업데이트
+aws lambda update-function-configuration --function-name dictateFunction --handler dictate.Handler --memory 500 --timeout 60
+
+
+AWS Lambda 함수 호출
+INTELLIJ 터미널에서 AWS LAMBDA 함수 호출
+JSON 객체 생성 후 dictateFunction을 호출
+명령이 200 상태를 반환하여 성공적이었음을 나타냄 -> resources 폴더에 새 response.txt 파일
+dictateFunction에서 반환되는 출력은 response.txt 파일에 캡처
+response.txt = 버킷의 MP3 파일로 연결되는 미리 서명된 URL
+
+AWS CONSOLE에서 AWS LAMBDA 함수 호출
+lambda창 -> dictate-function인 함수를 선택
+
+Test 탭을 선택
+Test event action:  Create new event
+Event name: testPolly
+Event sharing settings:  Private
+Template - optional: hello-world
+Event JSON:
+{
+  "UserId": "newbie",
+  "NoteId": "2",
+  "VoiceId": "Joey"
+}
+Save를 선택하여 테스트 이벤트를 브라우저 캐시에 저장
+Test를 선택
+Execution result: succeeded (logs) 상자에서  Details를 확장
+반환된 URL(따옴표 없음)을 복사하고 해당 URL로 이동
+
+나머지 AWS Lambda 함수 생성
+디렉터리로 변경
+cd C:\code\dictateFunction\solutions
+
+lambdaPollyRole의 ARN에 대한 변수를 생성
+aws iam list-roles --output text --query "Roles[?contains(RoleName, `lambdaPollyRole`) == `true`].Arn"
+
+role ARN 변수를 설정
+set roleArn=arn:aws:iam::229360036537:role/lambdaPollyRole
+
+createUpdateFunction을 생성
+aws lambda create-function --function-name createUpdateFunction ^
+--handler createupdate.Handler ^
+--runtime java11 ^
+--memory 300 ^
+--timeout 60 ^
+--role "%roleArn%" ^
+--environment Variables="{TABLE_NAME=Notes}" ^
+--zip-file fileb://createupdateFunction.jar
+
