@@ -1,0 +1,361 @@
+API Gateway
+(endpoint를 하나로 통합해서 관리하겠다
+복잡성 증가 -> 관리하기 힘들다 -> 장애 발생할 확률 증가
+인증 = Cognito)
+서버로 기능을 올리고 관리 할 수 있다
+서버리스 환경에서도 사용하고 관리할 수 있게 제공해주는 서비스
+
+외부에서 들어오는 요청들을 하나의 endpoint로 관리
+인터넷에서 직접적으로 데이터들에 접근이 불가능하다
+배포할 때 edge location을 이용해서 배포 가능 -> 보안 관련 서비스 (웹 방화벽, 실드) 이용 가능
+
+HTTP API
+http 프로토콜을 이용
+
+REST API
+http 프로토콜 + 요구 조건 충족
+
+WebSocket API
+동적으로 변경하는 사이트 -> 기존 방식은 계속 새로 고침 요청을 보내야 함
+터널을 이용해서 지속적으로 정보를 웹 브라우저에 던져줄 수 있다
+
+개발자 기능
+프록시 모드 = 중간자 역할 (요청이 오면 그대로 전송)
+상황에 따라 데이터 변환 (format에 맞게 변환)
+versioning 기능 제공, 복구 기능 제공
+SDK 생성
+Mock (실체는 없는데 껍데기는 있는 것, 요청 보내면 응답이 정해져 있음) 통합
+응답 캐싱 (응답 속도 증가, 컴퓨터 부담 감소 / 비용 감소)
+
+리소스
+가장 우선해서 생성해야 함
+하위 경로 (/...) -> GET, POST 등 들어온 요청 판단 -> 요청
+
+코드형 API
+Swagger = 정의 문서 (6번째 실습 참고)
+대응 수단으로도 사용
+API Gateway에 한정된 배포 문서
+
+클라우드 포메이션
+코드로 인프라를 배포하는 환경
+
+배포
+stage 이름 지정 (버전 관리)
+canary 배포(안정적으로 어플리케이션을 배포하는 환경)
+전체 고객에게 배포하는 것이 아닌 일부 고객에게 배포 후 모니터링
+
+
+실습
+REST API 및 리소스 생성
+AMAZON API GATEWAY 및 리소스 생성
+API Gateway -> REST API 카드에서 Build를 선택 (REST API Private이라고 되어있는 옵션 선택 X)
+API details:  New API / API name: PollyNotesAPI 입력 후 create
+Proxy resource: 옵션이 아직 비활성화되지 않은 경우 토글을 해제
+Resource Name: notes
+CORS (Cross Origin Resource Sharing): 체크박스를 선택 후 create
+
+GET 메서드를 구성하고 응답 변환을 위한 매핑 템플릿을 추가
+GET 메서드 구성
+/notes 리소스를 선택하고 Create Method를 선택
+Method type에서 GET을 선택 / Lambda Function에서 list-function가 포함된 ARN을 선택 후 create
+/notes - GET - Method Execution 패널에서 TEST 탭을 선택 후 Test
+
+USERID 변수를 전달하도록 GET 메서드 통합 요청 업데이트
+mapping templates에 create template 선택
+Create template을 선택
+(안 보이면 edit 클릭 후 mapping templates에서 작성)
+Content-Type 상자에서 application/json을 입력
+Template body 상자에서 {"UserId":"student"}를 입력 후 create / save
+
+API 메서드에서 반환된 응답 데이터 제한
+아래로 스크롤하여 Mapping Templates 섹션으로 이동 후 Create template을 선택
+(안 보이면 edit 클릭 후 mapping templates에서 작성)
+Content type 상자에서 application/json을 입력
+Template body 상자에
+#set($inputRoot = $input.path('$'))
+[
+    #foreach($elem in $inputRoot)
+    {
+    "NoteId" : "$elem.NoteId",
+    "Note" : "$elem.Note"
+    } 
+    #if($foreach.hasNext),#end
+    #end
+]
+입력 후 create / save
+
+POST 메서드 구성 및 요청 검증 모델 추가
+/notes 리소스를 선택하고 Create Method을 선택
+Method type에서 POST를 선택
+Lambda Function에서 createUpdate-function이 포함된 ARN을 선택
+나머지 모든 값을 기본값으로 유지하고 Create Method를 선택
+Request Body 코드 블록에 다음 JSON 객체 입력 후 test, get 요청에서 다시 test 클릭
+
+POST 요청 본문에 대한 스키마 강제 적용
+(노트가 제출되지 않았거나 모든 필수 필드가 포함되지 않은 경우, Lambda 함수에 요청을 전달할 필요가 없다)
+왼쪽 탐색 패널의 API: PollyNotesAPI 아래에서 Models를 선택
+Create model을 선택
+Name에 NoteModel을 입력
+Content type에 application/json을 입력
+Model schema에
+{
+    "title": "Note",
+    "type": "object",
+    "properties": {
+        "UserId": {"type": "string"},
+        "NoteId": {"type": "integer"},
+        "Note": {"type": "string"}
+    },
+    "required": ["UserId", "NoteId", "Note"]
+}
+(객체로서 요청을 수신) create
+Resources 패널에서 /notes 리소스에 대해 POST를 선택
+Method Execution 패널에서 Method Request - Edit을 선택
+Request validator에서 Validate body를 선택
+Request Body - Add model을 선택
+Content type에 application/json을 입력 / Model name에서 NoteModel을 선택
+
+Test
+{
+    "Note": "This is your updated note using the Model validation",
+    "UserId": "student",
+    "id": 3
+}
+400, Invalid request body / 잘못된 요청 본문이 있었다고 명시
+{
+    "Note": "This is your updated note using the Model validation",
+    "UserId": "student",
+    "NoteId": 3
+}
+200 / 적용된 스키마와 일치하는 유효한 본문이 있는 경우, 요청은 성공하며 Lambda 함수에 의해 처리
+
+CORS 구성으로 API 배포
+CORS(CROSS-ORIGIN RESOURCE SHARING) 구성
+Resources 패널에서 /notes - Enable CORS를 선택
+Gateway Responses에서 Default 4XX 및 Default 5XX의 확인란을 선택 -> 브라우저에서 4xx 및 5xx 오류를 보기 위한 것
+Access-Control-Allow-Methods에서 GET, OPTIONS 및 POST 확인란을 선택 후 save
+
+API 배포
+Deploy API를 선택
+Stage에서 *New Stage*를 선택
+Stage name에 Prod를 입력 후 deploy
+Invoke URL을 복사하여 새 웹 브라우저 탭에 붙여넣고 URL 끝에 /notes를 추가한 다음 Enter 키
+JSON 문서 출력 확인
+
+
+모던 애플리케이션
+특징
+아키텍처 패턴 : 마이크로서비스
+전송 : DevOps
+모델 : 서버리스
+
+모놀리스 (모든 기능이 하나로 통합) -> 배포 속도가 느림, 영향을 받는 기능 범위가 크다
+배포 복잡성, 일정의 경직성, 운영 오버헤드가 크다
+
+마이크로서비스 -> 배포 속도 빠름, 영향 받는 기능 범위가 적어짐
+최소 기능 서비스로 분리
+
+개발자가 파이프라인(CRCD)을 다 하고 팀장이 배포 결정
+
+컨테이너 컴퓨팅 환경이 가장 많이 사용됨
+최신은 서버리스 컴퓨팅
+-> 비용이 싸다 (365일 지속 처리 업무는 lambda 서비스 보다 instance 서비스를 사용하는 것이 비용적인 면에서 좋을 수도 있다)
+
+
+액세스 권한 부여
+세션 정보 추적(서버리스는 저장된 곳이 없어서 추적 불가)
+DynamoDB가 세션정보 유지하는 용도로 사용되기도 함
+인증 : 신원 확인
+권한 부여 : 원하는 작업을 사용자가 수행할 수 있는지 확인
+
+페더레이션 사용자 (SAML 프레임워크 사용)
+
+Cognito
+인증 : 사용자 풀 (회원정보 DB 역할)
+권한 부여 : 자격 증명 풀
+역할을 이용해서 권한 부여
+
+
+실습
+Amazon Cognito 구성
+앱 클라이언트가 설정된 AMAZON COGNITO 사용자 풀 생성
+Create user pool을 선택하고 다음 항목을 선택
+Authentication providers
+Provider types:  Cognito user pool
+Cognito user pool sign-in options:  User name
+
+Configure security requirements
+policy mode:  Custom
+minimum length: 6 character(s)
+Password requirements: (모두 선택 해제)
+Multi-factor authentication: No MFA
+User account recovery: 계정 복구가 필요하지 않음(선택 해제)
+
+Self-service sign-up
+제공된 상자를 선택하여 자체 등록을 활성화
+Self-registration:  Enable self-registration
+Attribute verification and user account confirmation
+이 실습에서는 메시지를 확인할 필요 X(선택 해제)
+
+Configure message delivery
+Email: Cognito를 사용하여 사용자에게 이메일 메시지를 보내도록 사용자 풀을 구성
+
+Integrate your app
+User pool name: PollyNotesPool
+Use the Cognito Hosted UI(선택 해제)
+App type:  Public client
+App client name: PollyNotesWeb
+Client secret:  Don’t generate a client secret
+
+Review 후 create
+
+PollyNotesPool 링크를 선택
+ID, ARN 복사 후 App Integration - App client list에서 Client ID 를 동일한 파일에 저장
+
+사용자 풀에 새 사용자 추가
+cloud9에서 생성되어 있는 ide 실행
+apiURL='[apiURL]'
+CognitoPoolId='[User Pool Id]'
+AppClientId='[App Client Id]'
+위 3개 변수 지정 후
+aws cognito-idp sign-up --client-id $AppClientId --username student --password student
+student라는 이름의 새 Amazon Cognito 사용자를 생성
+aws cognito-idp admin-confirm-sign-up --user-pool-id $CognitoPoolId --username student
+명령으로 생성한 사용자에 대해 confirm 을 완료
+Cognito 콘솔로 이동 후 PollyNotesPool 링크의 Users 탭 아래에 student라는 새 사용자 확인
+
+간단한 웹 페이지에서 사용자 인증 테스트
+testLoginWebsite 값을 복사 후 처음 두 입력란에 이전 작업에서 복사해둔 Pool Id와 App Client Id를 입력
+사용자 이름 및 암호 입력란 모두에 student를 입력 후 Login
+JSON 웹 토큰 반환
+
+Amazon Cognito를 권한 부여자로 사용하도록 Amazon API Gateway를 구성
+콘솔을 사용하여 POLLYNOTESAPI에 대한 AMAZON API GATEWAY 권한 부여자 생성
+PollyNotesAPI - Authorizers를 선택 후 create
+Authorizer Name: PollyNotesPool
+Type: Cognito
+Cognito User Pool: PollyNotesPool
+Token source: Authorization
+Token Validation: 비워 두고 Create
+
+PollyNotesPool를 선택
+Token value 입력 상자에 생성해둔 Token 입력 후 test
+
+새 권한 부여자를 사용하도록 기존 메서드를 구성
+Resources - /notes 아래에서 GET - Method Request - Edit을 선택
+Authorization의 경우 Cognito user pool authorizers에서 PollyNotesPool을 선택
+Integration Request을 선택 - application/json의 경우 Edit을 선택
+{
+    "UserId": "$context.authorizer.claims['cognito:username']"
+}
+로 body 변경
+
+Resources - /notes 아래에서 POST - Method Request - Edit을 선택
+Authorization의 경우 Cognito user pool authorizers에서 PollyNotesPool을 선택
+Integration Request을 선택 - application/json의 경우 Edit을 선택
+{
+    "UserId": "$context.authorizer.claims['cognito:username']",
+    "NoteId": $input.json('$.NoteId'),
+    "Note": $input.json('$.Note')
+}
+로 body 변경
+
+Swagger 파일을 사용하여 나머지 API 리소스 생성
+SWAGGER 파일을 사용자 지정
+변수를 변경
+region=$(curl http://169.254.169.254/latest/meta-data/placement/region -s)
+
+acct=$(aws sts get-caller-identity --output text --query "Account")
+
+poolId=$(aws cognito-idp list-user-pools --max-results 1 --output text --query "UserPools[].Id")
+
+poolArn="arn:aws:cognito-idp:$region:$acct:userpool/$poolId"
+
+swagger 파일 자리 표시자를 업데이트
+sed -i "s~\[Cognito_Pool_ARN\]~$poolArn~g" ~/environment/api/PollyNotesAPI-swagger.yaml
+
+sed -i "s~\[AWS_Region\]~$region~g" ~/environment/api/PollyNotesAPI-swagger.yaml
+
+sed -i "s~\[AWS_AccountId\]~$acct~g" ~/environment/api/PollyNotesAPI-swagger.yaml
+
+cd ~/environment/api
+
+apiId 변수를 PollyNotesAPI ID로 설정
+apiId=$(aws apigateway get-rest-apis --query "items[?name == 'PollyNotesAPI'].id" --output text)
+새 리소스를 API Gateway로 가져
+aws apigateway put-rest-api --rest-api-id $apiId --mode merge --body 'fileb://PollyNotesAPI-swagger.yaml'
+새 리소스를 API Gateway로 배포
+aws apigateway create-deployment --rest-api-id $apiId --stage-name Prod
+함수에 Lambda 권한을 추가
+aws lambda add-permission --function-name delete-function --statement-id apiInvoke --action lambda:InvokeFunction --principal apigateway.amazonaws.com
+
+aws lambda add-permission --function-name dictate-function --statement-id apiInvoke --action lambda:InvokeFunction --principal apigateway.amazonaws.com
+
+aws lambda add-permission --function-name search-function --statement-id apiInvoke --action lambda:InvokeFunction --principal apigateway.amazonaws.com
+
+프런트엔드 웹 애플리케이션 구성
+웹 애플리케이션 구성
+Config.js 파일 자리 표시자를 업데이트
+sed -i "s~\[UserPoolId\]~$CognitoPoolId~g" ~/environment/web/src/Config.js
+
+sed -i "s~\[AppClientId\]~$AppClientId~g" ~/environment/web/src/Config.js
+
+sed -i "s~\[ApiURL\]~$apiURL~g" ~/environment/web/src/Config.js
+
+cd ~/environment/web
+종속성을 설치
+npm install
+
+웹 애플리케이션을 구축
+npm run test+build
+
+웹 사이트 버킷용 변수를 만든 다음 호스팅용 Amazon S3에 파일을 복사
+webBucket=WEBBUCKETNAME
+
+파일을 Amazon S3에 복사
+aws s3 sync --delete build/. s3://$webBucket
+
+웹 애플리케이션 기능 테스트
+PollyNotesWebsite URL을 새 웹 브라우저 탭에 붙여넣고 배포된 웹 사이트를 테스트
+
+
+교과목 평가
+http://dev-class.applaycrew.com/JobClassExamType-B.pdf
+
+보고서 작성
+누구나 봐도 이해할 수 있는 스크린샷과 내용을 첨부하여 보고서(pdf) 작성
+
+문제 구성
+음성 변환 파일을 URL 반환
+
+사용자 생성, 권한 부여 (/, 이름 무관)
+생성한 사용자
+
+cloudformation
+코드로 인프라 만들기 (적힌 순서대로 진행)
+
+주소에 ' ' 지우고 주소 입력
+
+cognito user pool 제작 됨
+
+2번 부터 개발자 입장으로 제작
+DB 생성시 이름, key 이름 
+버킷 생성 (이름 중복이 안 됨) - Public Access 설정 (block all public access 체크 해제 하고 버킷 생성해야 함)
+압축 파일 풀고 버킷에 업로드
+
+IAM Role 생성
+
+lambda 함수 생성
+코드 다운 받아서 업로드 (TODO 부분에 테이블 이름, 리전 코드 수정 후 업로드)
+
+API Gateway 순서대로 생성
+
+버킷 생성 (음성 파일 저장용 버킷)(이름 중복이 안 됨) - Public Access 설정 (block all public access 체크 해제 하고 버킷 생성해야 함)
+
+lambda 함수 생성
+trigger 확인
+코드 다운 받아서 업로드 (TODO 부분에 테이블 이름, 버킷 이름, 리전 코드 수정 후 업로드)
+
+배포
+웹 버킷 이름 수정해서 접근
+동작 확인 (URL이 뜨지 않으면 새로 고침)
